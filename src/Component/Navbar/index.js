@@ -16,7 +16,7 @@ function Navbar() {
   return (
     <div className="__navbar">
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div className="container-fluid">
+        <div className="container">
           <NavLink className="navbar-brand d-flex align-items-center" to="/">
             <img
               src={KlabberLogo}
