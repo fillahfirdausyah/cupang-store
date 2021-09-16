@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 import { Navbar, Jumbotron, Footer } from "../../Component";
 import dataProduct from "../../dataProduct";
@@ -35,7 +36,12 @@ function HomePage() {
           <div className="__homeProductList">
             <div className="row">
               {dataProduct.map((data) => (
-                <div className="col-4" key={data.id}>
+                <div
+                  className="col-lg-3 col-md-6"
+                  key={data.id}
+                  data-aos="fade-up"
+                  data-aos-duration="700"
+                >
                   <div className="__productCard">
                     <div className="__productCardBody">
                       <img src={data.img} alt="" />
@@ -47,6 +53,9 @@ function HomePage() {
                 </div>
               ))}
             </div>
+            <NavLink to="/products" className="btn btn-primary mt-5">
+              More Product
+            </NavLink>
           </div>
         </div>
         {/* End product */}

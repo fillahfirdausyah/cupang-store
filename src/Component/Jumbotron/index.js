@@ -6,7 +6,11 @@ import "./style.css";
 function Jumbotron() {
   return (
     <div className="__jumbotron">
-      <div className="__carouselWrapper">
+      <div
+        className="__carouselWrapper"
+        data-aos="zoom-out"
+        data-aos-duration="900"
+      >
         <Carousel indicators={false} nextLabel="" prevLabel="" interval={3000}>
           <Carousel.Item>
             <img
