@@ -21,7 +21,7 @@ function Footer() {
                 <div className="sosmed d-flex justify-content-between">
                   <InstagramIcon fontSize="small" />
                   <FacebookIcon fontSize="small" />
-                  <img src={TokopediaIcon} />
+                  <img src={TokopediaIcon} alt="" />
                 </div>
               </div>
             </div>
