@@ -1,0 +1,38 @@
+.__aboutUs {
+  margin-top: 100px;
+  font-size: 14px;
+  margin-bottom: 100px;
+}
+
+.__aboutUs .aboutCaption {
+  max-width: 700px;
+}
+
+.__aboutUs .aboutCaption span {
+  font-size: 30px;
+  font-family: Cyberpunk-Regular;
+  color: #e9c501;
+}
+
+@media (max-width: 767.98px) {
+  .__aboutUs .aboutImg img {
+    width: 200px;
+    /* height: 150px; */
+  }
+
+  .__aboutUs .aboutCaption {
+    min-width: 330px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .__aboutUs {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .__aboutUs .aboutCaption {
+    min-width: 200px;
+  }
+}
