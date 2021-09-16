@@ -1,0 +1,61 @@
+.__homeSection {
+  margin-top: 20px;
+  font-size: 13px;
+}
+
+.__homeSection h1 {
+  font-family: Cyberpunk-Regular;
+  color: #e9c501;
+}
+
+.__homeSection blockquote {
+  border-left: 3px solid #e9c501;
+  padding: 0.5rem 1rem;
+}
+
+.__homeProduct {
+  text-align: center;
+  margin-top: 100px;
+}
+
+.__homeProduct h1 {
+  font-size: 27px;
+  color: #e9c501;
+}
+
+.__homeProduct p {
+  font-size: 12px;
+}
+
+.__homeProductList {
+  margin-top: 30px;
+}
+
+.__productCard {
+  position: relative;
+  background-color: rgba(33, 37, 41, 1);
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 20px;
+}
+
+.__productCardBody img {
+  max-width: 100%;
+}
+
+.__productCardRibbon {
+  position: absolute;
+  background-color: #e9c501;
+  color: black;
+  width: 150px;
+  height: 40px;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.__productCardRibbon span {
+  font-size: 13px;
+}
