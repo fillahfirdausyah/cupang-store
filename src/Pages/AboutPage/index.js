@@ -12,10 +12,18 @@ function AboutPage() {
       {/* Main */}
       <div className="container">
         <div className="__aboutUs d-flex align-items-center">
-          <div className="aboutImg">
+          <div
+            className="aboutImg"
+            data-aos="fade-right"
+            data-aos-duration="800"
+          >
             <img src={KlabberLogog} alt="" />
           </div>
-          <div className="aboutCaption mx-3">
+          <div
+            className="aboutCaption mx-3"
+            data-aos="fade-up"
+            data-aos-duration="1000"
+          >
             <span>Klabber.ID</span>
             <h1>Tentang Kami</h1>
             <p>
