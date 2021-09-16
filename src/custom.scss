@@ -1,6 +1,23 @@
+@font-face {
+  font-family: "Cyberpunk-Regular";
+  src: url("./Assets/fonts/Cyberpunk-Regular.eot");
+  src: url("./Assets/fonts/Cyberpunk-Regular.eot?#iefix")
+      format("embedded-opentype"),
+    url("./Assets/fonts/Cyberpunk-Regular.svg#Cyberpunk-Regular") format("svg"),
+    url("./Assets/fonts/Cyberpunk-Regular.ttf") format("truetype"),
+    url("./Assets/fonts/Cyberpunk-Regular.woff") format("woff"),
+    url("./Assets/fonts/Cyberpunk-Regular.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
 body {
   background-color: #191919 !important;
   color: white !important;
+}
+
+.nav-link.active {
+  color: #e9c501 !important;
 }
 
 $font-family-sans-serif: "Poppins";
