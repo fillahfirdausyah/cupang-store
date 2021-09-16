@@ -1,0 +1,58 @@
+.__footer {
+  background-color: #383638;
+  padding-top: 106px;
+  color: white;
+  padding-bottom: 106px;
+  margin-top: 50px;
+  font-size: 14px;
+}
+
+.section1 img {
+  width: 100px;
+  margin-right: 10px;
+  border-radius: 10px;
+}
+
+.__footer .section1 h3 {
+  font-weight: 800;
+  font-size: medium;
+  font-family: Cyberpunk-Regular;
+  color: #e9c501;
+}
+
+.octa-footer p {
+  font-size: small;
+  font-weight: 200;
+  margin-top: 20px;
+}
+
+p.year {
+  margin-top: 40px;
+}
+
+.__footer h1 {
+  font-size: medium;
+  font-weight: 600;
+}
+
+.__footer li {
+  list-style: none;
+  margin-top: 15px;
+  font-weight: 200;
+  font-size: small;
+}
+
+.infoWrapper .sosmed {
+  width: 160px;
+}
+
+@media (max-width: 767.98px) {
+  .octa-footer {
+    text-align: left;
+  }
+
+  .__footer {
+    margin: 0 auto;
+    text-align: left;
+  }
+}

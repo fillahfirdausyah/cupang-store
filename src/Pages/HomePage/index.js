@@ -2,6 +2,7 @@ import React from "react";
 
 import Navbar from "../../Component/Navbar";
 import Jumbotron from "../../Component/Jumbotron";
+import Footer from "../../Component/Footer";
 
 import "./style.css";
 
@@ -10,6 +11,7 @@ function HomePage() {
     <div className="__homePage">
       <Navbar />
       <Jumbotron />
+      <Footer />
     </div>
   );
 }
