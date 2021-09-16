@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 
 import KlabberLogo from "../../Assets/img/klabber.jpg";
 
@@ -7,22 +7,26 @@ import "./style.css";
 
 function Navbar() {
   const [isNavCollapse, setIsNavCollapse] = useState(true);
+  const location = useLocation();
+  const { pathname } = location;
+  const splitLocation = pathname.split("/");
 
   const handleNavCollapse = () => setIsNavCollapse(!isNavCollapse);
 
   return (
     <div className="__navbar">
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
-          <Link class="navbar-brand d-flex align-items-center" to="/">
+      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div className="container-fluid">
+          <NavLink className="navbar-brand d-flex align-items-center" to="/">
             <img
               src={KlabberLogo}
-              class="d-inline-block align-text-top __navbarImg"
+              className="d-inline-block align-text-top __navbarImg"
+              alt=""
             />
             Klabber ID
-          </Link>
+          </NavLink>
           <button
-            class="navbar-toggler"
+            className="navbar-toggler"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarNavAltMarkup"
@@ -31,31 +35,65 @@ function Navbar() {
             aria-label="Toggle navigation"
             onClick={handleNavCollapse}
           >
-            <span class="navbar-toggler-icon"></span>
+            <span className="navbar-toggler-icon"></span>
           </button>
           <div
-            class={`${isNavCollapse ? "collapse" : ""} navbar-collapse`}
+            className={`${isNavCollapse ? "collapse" : ""} navbar-collapse`}
             id="navbarNavAltMarkup"
           >
-            <div class="navbar-nav ms-auto">
-              <Link class="nav-link active" to="/">
+            <div className="navbar-nav ms-auto">
+              <NavLink
+                className={
+                  splitLocation[1] === "home" ? "nav-link active" : "nav-link"
+                }
+                to="/home"
+              >
                 Home
-              </Link>
-              <Link class="nav-link" to="/products">
+              </NavLink>
+              <NavLink
+                className={
+                  splitLocation[1] === "products"
+                    ? "nav-link active"
+                    : "nav-link"
+                }
+                to="/products"
+              >
                 Products
-              </Link>
-              <Link class="nav-link" to="/about">
+              </NavLink>
+              <NavLink
+                className={
+                  splitLocation[1] === "about" ? "nav-link active" : "nav-link"
+                }
+                to="/about"
+              >
                 About
-              </Link>
-              <Link class="nav-link" to="/faq">
+              </NavLink>
+              <NavLink
+                className={
+                  splitLocation[1] === "faq" ? "nav-link active" : "nav-link"
+                }
+                to="/faq"
+              >
                 FaQ
-              </Link>
-              <Link class="nav-link" to="/how-to-order">
+              </NavLink>
+              <NavLink
+                className={
+                  splitLocation[1] === "how-to-order"
+                    ? "nav-link active"
+                    : "nav-link"
+                }
+                to="/how-to-order"
+              >
                 How To Order
-              </Link>
-              <Link class="nav-link" to="/blog">
+              </NavLink>
+              <NavLink
+                className={
+                  splitLocation[1] === "blog" ? "nav-link active" : "nav-link"
+                }
+                to="/blog"
+              >
                 Blog
-              </Link>
+              </NavLink>
             </div>
           </div>
         </div>

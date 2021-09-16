@@ -9,3 +9,8 @@
   border-radius: 50%;
   margin-right: 5px;
 }
+
+.navbar-nav .nav-link {
+  font-size: 14px;
+  font-weight: 600;
+}
