@@ -1,0 +1,11 @@
+.navbar-brand {
+  font-family: Cyberpunk-Regular;
+  color: #e9c501 !important;
+}
+
+.__navbarImg {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 5px;
+}

@@ -1,10 +1,13 @@
 import React from "react";
+
+import Navbar from "../../Component/Navbar";
+
 import "./style.css";
 
 function HomePage() {
   return (
     <div className="__homePage">
-      <h1>HomePage</h1>
+      <Navbar />
     </div>
   );
 }
