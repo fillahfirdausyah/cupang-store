@@ -1,8 +1,6 @@
 import React from "react";
 
-import Navbar from "../../Component/Navbar";
-import Jumbotron from "../../Component/Jumbotron";
-import Footer from "../../Component/Footer";
+import { Navbar, Jumbotron, Footer } from "../../Component";
 
 import "./style.css";
 
