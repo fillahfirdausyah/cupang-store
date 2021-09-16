@@ -1,6 +1,6 @@
 import React from "react";
 
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import {
   AboutPage,
   BlogPage,
@@ -14,7 +14,8 @@ const Router = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/" exact>
+        <Redirect path="/" to="/home" exact />
+        <Route path="/home" exact>
           <HomePage />
         </Route>
         <Route path="/products" exact>
