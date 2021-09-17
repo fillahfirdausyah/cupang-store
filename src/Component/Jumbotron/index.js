@@ -8,7 +8,7 @@ function Jumbotron() {
     <div className="__jumbotron">
       <div
         className="__carouselWrapper"
-        data-aos="zoom-out"
+        data-aos="zoom-in"
         data-aos-duration="900"
       >
         <Carousel

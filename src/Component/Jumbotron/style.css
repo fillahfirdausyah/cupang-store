@@ -1,5 +1,6 @@
 .__jumbotron {
   padding: 0 70px;
+  margin-top: 25px;
 }
 
 .__jumbotron .__carouselWrapper {
@@ -16,8 +17,8 @@
 .carousel .carousel-inner {
   width: 100%;
   height: 100%;
-  border-bottom-left-radius: 15px;
-  border-bottom-right-radius: 15px;
+  /* border-bottom-left-radius: 15px; */
+  /* border-bottom-right-radius: 15px; */
 }
 
 .carousel .carousel-inner .carousel-item {
