@@ -31,9 +31,9 @@ function Footer() {
           <div className="col-md-3 col-6 mt-5">
             <h1>Syarat & Kebijakan</h1>
             <li>Syarat Layanan</li>
-            <li>Aturan Menengah</li>
+            <li>Kebijakan Pembayaran</li>
             <li>Kebijakan Privasi</li>
-            <li>Syarat Program Mitra</li>
+            <li>Kebijakan Pengiriman</li>
           </div>
           <div className="col-md-3 col-6 mt-5">
             <h1>Produksi</h1>
