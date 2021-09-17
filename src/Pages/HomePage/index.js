@@ -36,13 +36,12 @@ function HomePage() {
           <div className="__homeProductList">
             <div className="row">
               {dataProduct.map((data) => (
-                <div
-                  className="col-lg-3 col-md-6"
-                  key={data.id}
-                  data-aos="fade-up"
-                  data-aos-duration="700"
-                >
-                  <div className="__productCard">
+                <div className="col-lg-3 col-md-4" key={data.id}>
+                  <div
+                    className="__productCard"
+                    data-aos="fade-up"
+                    data-aos-duration="700"
+                  >
                     <div className="__productCardBody">
                       <img src={data.img} alt="" />
                     </div>
