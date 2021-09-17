@@ -8,10 +8,16 @@ function Jumbotron() {
     <div className="__jumbotron">
       <div
         className="__carouselWrapper"
-        data-aos="fade-down"
+        data-aos="zoom-out"
         data-aos-duration="900"
       >
-        <Carousel indicators={false} nextLabel="" prevLabel="" interval={3000}>
+        <Carousel
+          indicators={false}
+          nextLabel=""
+          prevLabel=""
+          interval={3000}
+          fade
+        >
           <Carousel.Item>
             <img
               className="d-block w-100"
