@@ -14,7 +14,7 @@ import {
 const Router = () => {
   return (
     <BrowserRouter>
-      <ScrollToTop />
+        <ScrollToTop />
       <Switch>
         <Redirect path="/" to="/home" exact />
         <Route path="/home" exact>
