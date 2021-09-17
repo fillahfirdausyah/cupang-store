@@ -1,6 +1,7 @@
 import React from "react";
 
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
+import ScrollToTop from "./ScrollToTop";
 import {
   AboutPage,
   BlogPage,
@@ -13,6 +14,7 @@ import {
 const Router = () => {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Switch>
         <Redirect path="/" to="/home" exact />
         <Route path="/home" exact>
