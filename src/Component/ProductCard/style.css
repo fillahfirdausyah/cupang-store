@@ -2,7 +2,8 @@
   position: relative;
   background-color: rgba(33, 37, 41, 1);
   width: 100%;
-  margin-top: 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
 }
 
 .__productCardBestSeller.hidden {
@@ -40,7 +41,7 @@
   position: absolute;
   background-color: #e9c501;
   color: black;
-  width: 150px;
+  width: 40%;
   height: 40px;
   bottom: 0;
   display: flex;
@@ -49,5 +50,5 @@
 }
 
 .__productCardRibbon span {
-  font-size: 13px;
+  font-size: 10px;
 }
