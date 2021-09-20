@@ -1,0 +1,34 @@
+.__faqPage hr {
+  margin-top: 80px;
+}
+
+.__faqTitleSection {
+  margin-top: 80px;
+}
+
+.__cardPertanyaan {
+  width: 100%;
+  background-color: rgba(33, 37, 41, 1);
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.__cardPertanyaan header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px;
+  border-left: 5px solid #e9c501;
+}
+
+.__cardPertanyaan header.open {
+  background-color: #e9c501;
+  transition: ease-in 500ms;
+  color: black;
+}
+
+.__cardPertanyaanBodyText {
+  padding: 15px;
+}
