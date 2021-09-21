@@ -11,7 +11,6 @@
 .__productCategory {
   flex: 3;
   margin-left: 50px;
-  /* background-color: green; */
 }
 
 .__listProductCategory ul {
@@ -56,5 +55,9 @@
 @media (max-width: 991.98px) {
   .__product {
     flex-direction: column;
+  }
+
+  .__productCategory {
+    margin-left: 0;
   }
 }
