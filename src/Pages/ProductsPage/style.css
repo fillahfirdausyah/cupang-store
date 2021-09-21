@@ -55,9 +55,14 @@
 @media (max-width: 991.98px) {
   .__product {
     flex-direction: column;
+    margin-top: 30px;
   }
 
   .__productCategory {
     margin-left: 0;
+  }
+
+  .__listProductCategory ul li {
+    font-size: medium;
   }
 }
