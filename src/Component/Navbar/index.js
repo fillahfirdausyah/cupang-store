@@ -86,14 +86,14 @@ function Navbar() {
               >
                 How To Order
               </NavLink>
-              <NavLink
+              {/* <NavLink
                 className={
                   splitLocation[1] === "blog" ? "nav-link active" : "nav-link"
                 }
                 to="/blog"
               >
                 Blog
-              </NavLink>
+              </NavLink> */}
             </div>
           </div>
         </div>
