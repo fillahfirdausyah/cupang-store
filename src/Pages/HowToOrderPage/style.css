@@ -1,0 +1,26 @@
+.__titleSection {
+  /* text-align: center; */
+  margin-top: 50px;
+}
+
+.__titleSection h1 {
+  text-align: center;
+}
+
+.__imgWrapper {
+  width: 100%;
+}
+
+.__titleSection img {
+  margin-top: 50px;
+  width: 100%;
+}
+
+.__howToOrderSection {
+  margin-top: 20px;
+}
+
+.__howToOrderSection h1 {
+  margin-bottom: 20px;
+  color: #e9c501;
+}
