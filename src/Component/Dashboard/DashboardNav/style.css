@@ -1,0 +1,21 @@
+.__sideNav {
+  background-color: rgba(33, 37, 41, 1);
+  order: 2;
+  position: sticky;
+  bottom: 0;
+  z-index: 1;
+}
+
+.__sideNav ul {
+  display: flex;
+  list-style: none;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0;
+  padding: 0;
+  height: 50px;
+}
+
+.__sideNav ul li {
+  margin-left: 0;
+}

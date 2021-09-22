@@ -1,0 +1,36 @@
+.__mainDashboard {
+  /* background-color: red; */
+  order: 1;
+  flex: 1;
+  padding: 15px;
+}
+
+.__cardInfo {
+  background-color: rgba(33, 37, 41, 1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+
+.__cardInfo-primary {
+  border-left: 7px solid #e9c501;
+  color: #e9c501;
+}
+
+.__cardInfo-secondary {
+  border-left: 7px solid purple;
+  color: purple;
+}
+
+.__cardInfo .__cardInfoLeft span {
+  font-size: 17px;
+  font-weight: 500;
+  color: white;
+}
+
+.__cardInfo .__cardInfoRight {
+  color: rgb(206, 206, 206);
+}
