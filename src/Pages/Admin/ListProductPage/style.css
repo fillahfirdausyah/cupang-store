@@ -30,8 +30,12 @@
   color: white;
 }
 
+.__filterProductWrapper {
+  margin-top: 10px;
+}
+
 .__listProductPageMainWrapper hr {
-  margin: 20px 0;
+  margin: 10px 0;
 }
 
 .__modalAddProductHeadFoot {
@@ -40,4 +44,29 @@
 
 .__modalAddProduct {
   background-color: #191919;
+}
+
+.__listTheProduct {
+  /* margin-top: 25px; */
+  background-color: rgba(33, 37, 41, 1);
+  overflow: hidden;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.__productInDashboardImgWrapper {
+  width: 100%;
+}
+
+.__listTheProduct img {
+  width: 100%;
+}
+
+.__productInfoTitle {
+  padding: 10px;
+  font-size: 13px;
+}
+
+.__productInfoTitle h3 {
+  font-size: 16px;
 }
