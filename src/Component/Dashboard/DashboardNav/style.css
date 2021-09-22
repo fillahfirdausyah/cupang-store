@@ -18,4 +18,9 @@
 
 .__sideNav ul li {
   margin-left: 0;
+  color: white;
+}
+
+.__sideNav ul li.active {
+  color: #e9c501;
 }
