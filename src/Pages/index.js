@@ -8,6 +8,7 @@ import LoginPage from "./LoginPage";
 
 import DashboardPage from "./Admin/DashboardPage";
 import ListProductPage from "./Admin/ListProductPage";
+import ListCategoryPage from "./Admin/ListCategoryPage";
 
 export {
   AboutPage,
@@ -19,4 +20,5 @@ export {
   LoginPage,
   DashboardPage,
   ListProductPage,
+  ListCategoryPage,
 };
