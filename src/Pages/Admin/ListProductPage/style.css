@@ -1,3 +1,43 @@
 .__listProductPage {
   flex: 1;
 }
+
+.__listProductPageMainWrapper {
+  margin-top: 20px;
+}
+
+.__listProductPageMainWrapper header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.__searchProductWrapper {
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+  border: 1px solid #e9c501;
+  height: 40px;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.__searchProductWrapper input {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  flex: 1;
+  color: white;
+}
+
+.__listProductPageMainWrapper hr {
+  margin: 20px 0;
+}
+
+.__modalAddProductHeadFoot {
+  background-color: rgba(33, 37, 41, 1);
+}
+
+.__modalAddProduct {
+  background-color: #191919;
+}
