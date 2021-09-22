@@ -34,7 +34,13 @@ function DashboardNav() {
             </li>
           </NavLink>
           <NavLink to="/admin/category">
-            <li>
+            <li
+              className={
+                splitLocation[1] === "admin" && splitLocation[2] === "category"
+                  ? "active"
+                  : ""
+              }
+            >
               <CategoryIcon />
             </li>
           </NavLink>
