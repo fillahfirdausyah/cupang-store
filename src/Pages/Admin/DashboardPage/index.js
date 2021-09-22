@@ -1,6 +1,10 @@
 import React from "react";
 
-import { DashboardHeader, DashboardMain, DashboardNav } from "../../Component";
+import {
+  DashboardHeader,
+  DashboardMain,
+  DashboardNav,
+} from "../../../Component";
 import "./style.css";
 
 function DashboardPage() {
