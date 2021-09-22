@@ -5,6 +5,7 @@ import HomePage from "./HomePage";
 import HowToOrderPage from "./HowToOrderPage";
 import ProductPage from "./ProductsPage";
 import LoginPage from "./LoginPage";
+import DashboardPage from "./DashboardPage";
 
 export {
   AboutPage,
@@ -14,4 +15,5 @@ export {
   HowToOrderPage,
   ProductPage,
   LoginPage,
+  DashboardPage,
 };
