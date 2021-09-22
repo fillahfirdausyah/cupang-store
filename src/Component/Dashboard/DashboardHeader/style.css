@@ -5,4 +5,5 @@
   height: 50px;
   top: 0;
   font-size: 17px;
+  z-index: 11;
 }
