@@ -2,5 +2,7 @@
   background-color: rgba(33, 37, 41, 1);
   padding: 10px;
   position: sticky;
+  height: 50px;
   top: 0;
+  font-size: 17px;
 }
