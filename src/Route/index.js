@@ -9,12 +9,13 @@ import {
   HomePage,
   HowToOrderPage,
   ProductPage,
+  LoginPage,
 } from "../Pages";
 
 const Router = () => {
   return (
     <BrowserRouter>
-        <ScrollToTop />
+      <ScrollToTop />
       <Switch>
         <Redirect path="/" to="/home" exact />
         <Route path="/home" exact>
@@ -34,6 +35,9 @@ const Router = () => {
         </Route>
         <Route path="/blog" exact>
           <BlogPage />
+        </Route>
+        <Route path="/login">
+          <LoginPage />
         </Route>
       </Switch>
     </BrowserRouter>
