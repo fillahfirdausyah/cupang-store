@@ -11,6 +11,7 @@ import {
   ProductPage,
   LoginPage,
   DashboardPage,
+  ListProductPage,
 } from "../Pages";
 
 const Router = () => {
@@ -37,11 +38,14 @@ const Router = () => {
         <Route path="/blog" exact>
           <BlogPage />
         </Route>
-        <Route path="/login">
+        <Route path="/login" exact>
           <LoginPage />
         </Route>
-        <Route path="/dashboard">
+        <Route path="/dashboard" exact>
           <DashboardPage />
+        </Route>
+        <Route path="/admin/products">
+          <ListProductPage />
         </Route>
       </Switch>
     </BrowserRouter>
