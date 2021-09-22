@@ -10,6 +10,7 @@ import {
   HowToOrderPage,
   ProductPage,
   LoginPage,
+  DashboardPage,
 } from "../Pages";
 
 const Router = () => {
@@ -38,6 +39,9 @@ const Router = () => {
         </Route>
         <Route path="/login">
           <LoginPage />
+        </Route>
+        <Route path="/dashboard">
+          <DashboardPage />
         </Route>
       </Switch>
     </BrowserRouter>
