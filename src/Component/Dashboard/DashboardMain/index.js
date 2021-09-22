@@ -28,7 +28,7 @@ function DashboardMain() {
       </div>
       <div className="__listProductDashboard">
         <h1>List Product</h1>
-        <table class="table table-radius table-dark">
+        <table className="table table-dark">
           <thead>
             <tr>
               <th scope="col">No</th>
