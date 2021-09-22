@@ -12,6 +12,7 @@ import {
   LoginPage,
   DashboardPage,
   ListProductPage,
+  ListCategoryPage,
 } from "../Pages";
 
 const Router = () => {
@@ -44,8 +45,11 @@ const Router = () => {
         <Route path="/dashboard" exact>
           <DashboardPage />
         </Route>
-        <Route path="/admin/products">
+        <Route path="/admin/products" exact>
           <ListProductPage />
+        </Route>
+        <Route path="/admin/category" exact>
+          <ListCategoryPage />
         </Route>
       </Switch>
     </BrowserRouter>
