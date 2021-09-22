@@ -12,7 +12,6 @@ function DashboardNav() {
   const location = useLocation();
   const { pathname } = location;
   const splitLocation = pathname.split("/");
-  console.log(splitLocation);
 
   return (
     <div className="__sideNav">
