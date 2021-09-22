@@ -1,3 +1,7 @@
+.__listProductDashboard table.table-radius {
+  border-radius: 10px !important;
+}
+
 .__mainDashboard {
   /* background-color: red; */
   order: 1;
