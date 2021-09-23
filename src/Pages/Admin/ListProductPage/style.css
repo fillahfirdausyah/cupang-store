@@ -75,3 +75,14 @@
 .__productInfoTitle h3 {
   font-size: 16px;
 }
+
+.loadingTheData {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.spinner-border.custom {
+  width: 60px !important;
+  height: 60px !important;
+}
