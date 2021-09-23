@@ -104,80 +104,82 @@ function MyVerticallyCenteredModal(props) {
       </Modal.Header>
       <Modal.Body className="__modalAddProduct">
         <form>
-          <div class="mb-3">
-            <label htmlFor="namaProduct" class="form-label">
+          <div className="mb-3">
+            <label htmlFor="namaProduct" className="form-label">
               Nama Product
             </label>
             <input
               type="text"
-              class="form-control"
+              className="form-control"
               id="namaProduct"
               placeholder="Nama Product.."
             />
           </div>
-          <div class="mb-3">
-            <label htmlFor="Category" class="form-label">
+          <div className="mb-3">
+            <label htmlFor="Category" className="form-label">
               Category
             </label>
-            <select class="form-select">
+            <select className="form-select">
               {props.dataCategory.map((x) => (
-                <option value={x.id}>{x.category}</option>
+                <option value={x.id} key={x.id}>
+                  {x.category}
+                </option>
               ))}
             </select>
           </div>
-          <div class="mb-3">
-            <label htmlFor="Material" class="form-label">
+          <div className="mb-3">
+            <label htmlFor="Material" className="form-label">
               Material
             </label>
             <input
               type="text"
-              class="form-control"
+              className="form-control"
               id="Material"
               placeholder="Material"
             />
-            <div class="form-text">Opsional</div>
+            <div className="form-text">Opsional</div>
           </div>
-          <div class="mb-3">
-            <label htmlFor="Warna" class="form-label">
+          <div className="mb-3">
+            <label htmlFor="Warna" className="form-label">
               Warna
             </label>
             <input
               type="text"
-              class="form-control"
+              className="form-control"
               id="Warna"
               placeholder="Warna"
             />
-            <div class="form-text">Opsional</div>
+            <div className="form-text">Opsional</div>
           </div>
-          <div class="mb-3">
-            <label htmlFor="Ukuran" class="form-label">
+          <div className="mb-3">
+            <label htmlFor="Ukuran" className="form-label">
               Ukuran
             </label>
             <input
               type="text"
-              class="form-control"
+              className="form-control"
               id="Ukuran"
               placeholder="Ukuran"
             />
-            <div class="form-text">Opsional</div>
+            <div className="form-text">Opsional</div>
           </div>
-          <div class="mb-3">
-            <label htmlFor="Additional" class="form-label">
+          <div className="mb-3">
+            <label htmlFor="Additional" className="form-label">
               Additional
             </label>
             <input
               type="text"
-              class="form-control"
+              className="form-control"
               id="Additional"
               placeholder="Additional"
             />
-            <div class="form-text">Opsional</div>
+            <div className="form-text">Opsional</div>
           </div>
-          <div class="mb-3">
-            <label for="formFile" class="form-label">
+          <div className="mb-3">
+            <label for="formFile" className="form-label">
               Gambar
             </label>
-            <input class="form-control" type="file" id="formFile" />
+            <input className="form-control" type="file" id="formFile" />
           </div>
           <button className="btn btn-primary w-100 mt-3">Tambah</button>
         </form>
