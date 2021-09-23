@@ -102,7 +102,7 @@ function MyVerticallyCenteredModal(props) {
           Tambah Product
         </Modal.Title>
       </Modal.Header>
-      <Modal.Body className="__modalAddProduct">
+      <Modal.Body className="__modalAddProduct __addProduct">
         <form>
           <div className="mb-3">
             <label htmlFor="namaProduct" className="form-label">

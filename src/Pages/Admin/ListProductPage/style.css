@@ -44,6 +44,9 @@
 
 .__modalAddProduct {
   background-color: #191919;
+}
+
+.__modalAddProduct.__addProduct {
   overflow: auto !important;
   height: 350px !important;
 }
