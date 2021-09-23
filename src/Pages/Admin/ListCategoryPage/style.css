@@ -11,3 +11,11 @@
   align-items: center;
   justify-content: space-between;
 }
+
+.toast_notify {
+  z-index: 111;
+}
+
+.__actionSection {
+  text-align: center;
+}
