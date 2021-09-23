@@ -13,10 +13,57 @@ function ListProductPage() {
   const [showModalProduct, setShowModalProduct] = useState(false);
 
   const [dataCategory, setDataCategory] = useState([]);
+  const [categoryId, setCategoryId] = useState(0);
+  const [productImage, setProductImage] = useState(null);
+  const [productData, setProductData] = useState({
+    title: "",
+    material: "",
+    color: "",
+    size: "",
+    additional: "",
+  });
 
   useEffect(() => {
     api.get("/api/category").then((res) => setDataCategory(res.data));
   }, []);
+
+  // Handle change input value
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setProductData({
+      ...productData,
+      [name]: value,
+    });
+  };
+
+  // Handle Select
+  const selectCategoryId = (e) => {
+    const { value } = e.target;
+    setCategoryId(value);
+  };
+
+  // Image Handler
+  const handleProductImage = (e) => {
+    setProductImage(e.target.files[0]);
+  };
+
+  // Add Product
+  const addProduct = (e) => {
+    e.preventDefault();
+    let newProductData = new FormData();
+    newProductData.append("title", productData.title);
+    newProductData.append("material", productData.material);
+    newProductData.append("color", productData.color);
+    newProductData.append("size", productData.size);
+    newProductData.append("additional", productData.additional);
+    newProductData.append("image", productImage);
+    newProductData.append("category_id", categoryId);
+
+    api
+      .post("/api/product", newProductData)
+      .then((res) => console.log(res.data))
+      .catch((err) => console.log(err));
+  };
 
   return (
     <div className="__dashboardPage">
@@ -35,7 +82,11 @@ function ListProductPage() {
               </button>
             </header>
             <div className="__searchProductWrapper">
-              <input type="text" placeholder="Cari Product.." />
+              <input
+                autoComplete="off"
+                type="text"
+                placeholder="Cari Product.."
+              />
               <SearchIcon />
             </div>
             <div className="__filterProductWrapper">
@@ -77,6 +128,11 @@ function ListProductPage() {
         show={showModal}
         onHide={() => setShowModal(false)}
         dataCategory={dataCategory}
+        productData={productData}
+        handleChange={handleChange}
+        addProduct={addProduct}
+        selectCategoryId={selectCategoryId}
+        handleProductImage={handleProductImage}
       />
 
       <ProductPreviewModal
@@ -103,23 +159,27 @@ function MyVerticallyCenteredModal(props) {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body className="__modalAddProduct __addProduct">
-        <form>
+        <form onSubmit={props.addProduct}>
           <div className="mb-3">
             <label htmlFor="namaProduct" className="form-label">
               Nama Product
             </label>
             <input
+              autoComplete="off"
               type="text"
               className="form-control"
               id="namaProduct"
               placeholder="Nama Product.."
+              value={props.productData.title}
+              onChange={props.handleChange}
+              name="title"
             />
           </div>
           <div className="mb-3">
             <label htmlFor="Category" className="form-label">
               Category
             </label>
-            <select className="form-select">
+            <select className="form-select" onChange={props.selectCategoryId}>
               {props.dataCategory.map((x) => (
                 <option value={x.id} key={x.id}>
                   {x.category}
@@ -132,10 +192,14 @@ function MyVerticallyCenteredModal(props) {
               Material
             </label>
             <input
+              autoComplete="off"
               type="text"
               className="form-control"
               id="Material"
               placeholder="Material"
+              value={props.productData.material}
+              onChange={props.handleChange}
+              name="material"
             />
             <div className="form-text">Opsional</div>
           </div>
@@ -144,10 +208,14 @@ function MyVerticallyCenteredModal(props) {
               Warna
             </label>
             <input
+              autoComplete="off"
               type="text"
               className="form-control"
               id="Warna"
               placeholder="Warna"
+              value={props.productData.color}
+              onChange={props.handleChange}
+              name="color"
             />
             <div className="form-text">Opsional</div>
           </div>
@@ -156,10 +224,14 @@ function MyVerticallyCenteredModal(props) {
               Ukuran
             </label>
             <input
+              autoComplete="off"
               type="text"
               className="form-control"
               id="Ukuran"
               placeholder="Ukuran"
+              value={props.productData.size}
+              onChange={props.handleChange}
+              name="size"
             />
             <div className="form-text">Opsional</div>
           </div>
@@ -168,18 +240,29 @@ function MyVerticallyCenteredModal(props) {
               Additional
             </label>
             <input
+              autoComplete="off"
               type="text"
               className="form-control"
               id="Additional"
               placeholder="Additional"
+              value={props.productData.additional}
+              onChange={props.handleChange}
+              name="additional"
             />
             <div className="form-text">Opsional</div>
           </div>
           <div className="mb-3">
-            <label for="formFile" className="form-label">
+            <label htmlFor="formFile" className="form-label">
               Gambar
             </label>
-            <input className="form-control" type="file" id="formFile" />
+            <input
+              autoComplete="off"
+              className="form-control"
+              type="file"
+              id="formFile"
+              name="image"
+              onChange={props.handleProductImage}
+            />
           </div>
           <button className="btn btn-primary w-100 mt-3">Tambah</button>
         </form>
