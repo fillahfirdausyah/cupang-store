@@ -9,6 +9,7 @@ import dataProduct from "../../../dataProduct";
 
 function ListProductPage() {
   const [showModal, setShowModal] = useState(false);
+  const [showModalProduct, setShowModalProduct] = useState(false);
   return (
     <div className="__dashboardPage">
       <DashboardHeader />
@@ -44,7 +45,11 @@ function ListProductPage() {
             <hr />
             <div className="row">
               {dataProduct.map((x) => (
-                <div className="col-6 col-lg-3" key={x.id}>
+                <div
+                  className="col-6 col-lg-3"
+                  key={x.id}
+                  onClick={() => setShowModalProduct(!showModalProduct)}
+                >
                   <div className="__listTheProduct">
                     <div className="__productInDashboard">
                       <div className="__productInDashboardImgWrapper">
@@ -65,6 +70,11 @@ function ListProductPage() {
       <MyVerticallyCenteredModal
         show={showModal}
         onHide={() => setShowModal(false)}
+      />
+
+      <ProductPreviewModal
+        show={showModalProduct}
+        onHide={() => setShowModalProduct(!showModalProduct)}
       />
     </div>
   );
@@ -97,6 +107,25 @@ function MyVerticallyCenteredModal(props) {
       </Modal.Body>
       <Modal.Footer className="__modalAddProductHeadFoot">
         <Button onClick={props.onHide}>Close</Button>
+      </Modal.Footer>
+    </Modal>
+  );
+}
+
+function ProductPreviewModal(props) {
+  return (
+    <Modal {...props} backdrop="static" keyboard={false} centered>
+      <Modal.Header className="__modalAddProductHeadFoot">
+        <Modal.Title>Modal title</Modal.Title>
+      </Modal.Header>
+      <Modal.Body className="__modalAddProduct">
+        I will not close if you click outside me. Don't even try to press escape
+        key.
+      </Modal.Body>
+      <Modal.Footer className="__modalAddProductHeadFoot">
+        <Button variant="danger" onClick={props.onHide}>
+          Close
+        </Button>
       </Modal.Footer>
     </Modal>
   );
