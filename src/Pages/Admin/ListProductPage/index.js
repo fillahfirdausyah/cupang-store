@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-import { Modal, Button, Dropdown, DropdownButton } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import api from "../../../Helpers/api-endpoint";
 
+import { Modal, Button, Dropdown, DropdownButton } from "react-bootstrap";
 import SearchIcon from "@material-ui/icons/Search";
 import { DashboardHeader, DashboardNav } from "../../../Component";
 import "./style.css";
@@ -10,6 +11,13 @@ import dataProduct from "../../../dataProduct";
 function ListProductPage() {
   const [showModal, setShowModal] = useState(false);
   const [showModalProduct, setShowModalProduct] = useState(false);
+
+  const [dataCategory, setDataCategory] = useState([]);
+
+  useEffect(() => {
+    api.get("/api/category").then((res) => setDataCategory(res.data));
+  }, []);
+
   return (
     <div className="__dashboardPage">
       <DashboardHeader />
@@ -35,11 +43,9 @@ function ListProductPage() {
                 id="dropdown-basic-button"
                 title="Filter Category"
               >
-                <Dropdown.Item onClick={() => console.log("hello")}>
-                  Action
-                </Dropdown.Item>
-                <Dropdown.Item>Another action</Dropdown.Item>
-                <Dropdown.Item>Something else</Dropdown.Item>
+                {dataCategory.map((x) => (
+                  <Dropdown.Item key={x.id}>{x.category}</Dropdown.Item>
+                ))}
               </DropdownButton>
             </div>
             <hr />
@@ -70,6 +76,7 @@ function ListProductPage() {
       <MyVerticallyCenteredModal
         show={showModal}
         onHide={() => setShowModal(false)}
+        dataCategory={dataCategory}
       />
 
       <ProductPreviewModal
@@ -83,30 +90,102 @@ function ListProductPage() {
 function MyVerticallyCenteredModal(props) {
   return (
     <Modal
-      {...props}
+      show={props.show}
+      onHide={props.onHide}
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
       backdrop="static"
     >
-      <Modal.Header className="__modalAddProductHeadFoot">
+      <Modal.Header className="__modalAddProductHeadFoot" closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          Modal heading
+          Tambah Product
         </Modal.Title>
       </Modal.Header>
       <Modal.Body className="__modalAddProduct">
-        <h4>Centered Modal</h4>
-        <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deserunt
-          eius dolor quam distinctio inventore, beatae temporibus assumenda
-          perferendis repellat dolore nihil! Eaque repellendus harum corrupti
-          voluptate facere quidem optio voluptas deleniti quam accusamus ad et,
-          illo in laboriosam! Ut, inventore! Mollitia eligendi ipsa eos cupidita
-          te inventore tenetur, consectetur exercitationem quibusdam.
-        </p>
+        <form>
+          <div class="mb-3">
+            <label htmlFor="namaProduct" class="form-label">
+              Nama Product
+            </label>
+            <input
+              type="text"
+              class="form-control"
+              id="namaProduct"
+              placeholder="Nama Product.."
+            />
+          </div>
+          <div class="mb-3">
+            <label htmlFor="Category" class="form-label">
+              Category
+            </label>
+            <select class="form-select">
+              {props.dataCategory.map((x) => (
+                <option value={x.id}>{x.category}</option>
+              ))}
+            </select>
+          </div>
+          <div class="mb-3">
+            <label htmlFor="Material" class="form-label">
+              Material
+            </label>
+            <input
+              type="text"
+              class="form-control"
+              id="Material"
+              placeholder="Material"
+            />
+            <div class="form-text">Opsional</div>
+          </div>
+          <div class="mb-3">
+            <label htmlFor="Warna" class="form-label">
+              Warna
+            </label>
+            <input
+              type="text"
+              class="form-control"
+              id="Warna"
+              placeholder="Warna"
+            />
+            <div class="form-text">Opsional</div>
+          </div>
+          <div class="mb-3">
+            <label htmlFor="Ukuran" class="form-label">
+              Ukuran
+            </label>
+            <input
+              type="text"
+              class="form-control"
+              id="Ukuran"
+              placeholder="Ukuran"
+            />
+            <div class="form-text">Opsional</div>
+          </div>
+          <div class="mb-3">
+            <label htmlFor="Additional" class="form-label">
+              Additional
+            </label>
+            <input
+              type="text"
+              class="form-control"
+              id="Additional"
+              placeholder="Additional"
+            />
+            <div class="form-text">Opsional</div>
+          </div>
+          <div class="mb-3">
+            <label for="formFile" class="form-label">
+              Gambar
+            </label>
+            <input class="form-control" type="file" id="formFile" />
+          </div>
+          <button className="btn btn-primary w-100 mt-3">Tambah</button>
+        </form>
       </Modal.Body>
       <Modal.Footer className="__modalAddProductHeadFoot">
-        <Button onClick={props.onHide}>Close</Button>
+        <Button onClick={props.onHide} className="btn btn-danger">
+          Close
+        </Button>
       </Modal.Footer>
     </Modal>
   );
@@ -115,7 +194,7 @@ function MyVerticallyCenteredModal(props) {
 function ProductPreviewModal(props) {
   return (
     <Modal {...props} backdrop="static" keyboard={false} centered>
-      <Modal.Header className="__modalAddProductHeadFoot">
+      <Modal.Header className="__modalAddProductHeadFoot" closeButton>
         <Modal.Title>Modal title</Modal.Title>
       </Modal.Header>
       <Modal.Body className="__modalAddProduct">
