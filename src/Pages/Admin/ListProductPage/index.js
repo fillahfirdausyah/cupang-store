@@ -6,15 +6,15 @@ import SearchIcon from "@material-ui/icons/Search";
 import { DashboardHeader, DashboardNav } from "../../../Component";
 import "./style.css";
 
-import dataProduct from "../../../dataProduct";
-
 function ListProductPage() {
   const [showModal, setShowModal] = useState(false);
   const [showModalProduct, setShowModalProduct] = useState(false);
+  const [reload, setReload] = useState(false);
 
   const [dataCategory, setDataCategory] = useState([]);
   const [categoryId, setCategoryId] = useState(0);
   const [productImage, setProductImage] = useState(null);
+  const [product, setProduct] = useState([]);
   const [productData, setProductData] = useState({
     title: "",
     material: "",
@@ -26,6 +26,15 @@ function ListProductPage() {
   useEffect(() => {
     api.get("/api/category").then((res) => setDataCategory(res.data));
   }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      let data = await api.get("/api/product");
+      setProduct(data.data);
+    };
+
+    fetchData();
+  }, [reload]);
 
   // Handle change input value
   const handleChange = (e) => {
@@ -63,6 +72,16 @@ function ListProductPage() {
       .post("/api/product", newProductData)
       .then((res) => console.log(res.data))
       .catch((err) => console.log(err));
+    e.target.reset();
+    setProductData({
+      title: "",
+      material: "",
+      color: "",
+      size: "",
+      additional: "",
+    });
+    setShowModal(false);
+    setReload(!reload);
   };
 
   return (
@@ -101,7 +120,7 @@ function ListProductPage() {
             </div>
             <hr />
             <div className="row">
-              {dataProduct.map((x) => (
+              {product.map((x) => (
                 <div
                   className="col-6 col-lg-3"
                   key={x.id}
@@ -110,11 +129,14 @@ function ListProductPage() {
                   <div className="__listTheProduct">
                     <div className="__productInDashboard">
                       <div className="__productInDashboardImgWrapper">
-                        <img src={x.img} alt="" />
+                        <img
+                          src={`http://127.0.0.1:8000/images/${x.image}`}
+                          alt=""
+                        />
                       </div>
                       <div className="__productInfoTitle">
-                        <h3>{x.name}</h3>
-                        <p className="category">Tas</p>
+                        <h3>{x.title}</h3>
+                        <p className="category">{x.category}</p>
                       </div>
                     </div>
                   </div>
@@ -180,6 +202,7 @@ function MyVerticallyCenteredModal(props) {
               Category
             </label>
             <select className="form-select" onChange={props.selectCategoryId}>
+              <option defaultValue>Pilih Category</option>
               {props.dataCategory.map((x) => (
                 <option value={x.id} key={x.id}>
                   {x.category}
