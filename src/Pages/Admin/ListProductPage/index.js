@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from "react";
 import api from "../../../Helpers/api-endpoint";
 
-import { Modal, Button, Dropdown, DropdownButton } from "react-bootstrap";
+import {
+  Modal,
+  Button,
+  Dropdown,
+  DropdownButton,
+  Spinner,
+} from "react-bootstrap";
 import SearchIcon from "@material-ui/icons/Search";
 import { DashboardHeader, DashboardNav } from "../../../Component";
 import "./style.css";
@@ -10,11 +16,13 @@ function ListProductPage() {
   const [showModal, setShowModal] = useState(false);
   const [showModalProduct, setShowModalProduct] = useState(false);
   const [reload, setReload] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [dataCategory, setDataCategory] = useState([]);
   const [categoryId, setCategoryId] = useState(0);
   const [productImage, setProductImage] = useState(null);
   const [product, setProduct] = useState([]);
+  const [searchProduct, setSearchProduct] = useState("");
   const [productData, setProductData] = useState({
     title: "",
     material: "",
@@ -29,12 +37,31 @@ function ListProductPage() {
 
   useEffect(() => {
     const fetchData = async () => {
+      setIsLoading(true);
       let data = await api.get("/api/product");
+      setIsLoading(false);
       setProduct(data.data);
     };
 
     fetchData();
   }, [reload]);
+
+  // Hanlde search
+  useEffect(() => {
+    const fetchData = async () => {
+      if (searchProduct.length > 0) {
+        setIsLoading(true);
+        let theData = await api.post("/api/search", {
+          title: searchProduct,
+        });
+        setProduct(theData.data);
+        setIsLoading(false);
+      } else {
+        api.get("/api/product").then((res) => setProduct(res.data));
+      }
+    };
+    fetchData();
+  }, [searchProduct]);
 
   // Handle change input value
   const handleChange = (e) => {
@@ -84,6 +111,19 @@ function ListProductPage() {
     setReload(!reload);
   };
 
+  // Filter product by category
+  const filterByCategory = (category) => {
+    if (category === "semua") {
+      api.get("/api/product").then((res) => setProduct(res.data));
+    } else {
+      api
+        .post("/api/search", {
+          category,
+        })
+        .then((res) => setProduct(res.data));
+    }
+  };
+
   return (
     <div className="__dashboardPage">
       <DashboardHeader />
@@ -105,6 +145,8 @@ function ListProductPage() {
                 autoComplete="off"
                 type="text"
                 placeholder="Cari Product.."
+                value={searchProduct}
+                onChange={(e) => setSearchProduct(e.target.value)}
               />
               <SearchIcon />
             </div>
@@ -113,36 +155,55 @@ function ListProductPage() {
                 id="dropdown-basic-button"
                 title="Filter Category"
               >
+                <Dropdown.Item onClick={() => filterByCategory("semua")}>
+                  Semua
+                </Dropdown.Item>
                 {dataCategory.map((x) => (
-                  <Dropdown.Item key={x.id}>{x.category}</Dropdown.Item>
+                  <Dropdown.Item
+                    key={x.id}
+                    onClick={() => filterByCategory(x.category)}
+                  >
+                    {x.category}
+                  </Dropdown.Item>
                 ))}
               </DropdownButton>
             </div>
             <hr />
-            <div className="row">
-              {product.map((x) => (
-                <div
-                  className="col-6 col-lg-3"
-                  key={x.id}
-                  onClick={() => setShowModalProduct(!showModalProduct)}
-                >
-                  <div className="__listTheProduct">
-                    <div className="__productInDashboard">
-                      <div className="__productInDashboardImgWrapper">
-                        <img
-                          src={`http://127.0.0.1:8000/images/${x.image}`}
-                          alt=""
-                        />
-                      </div>
-                      <div className="__productInfoTitle">
-                        <h3>{x.title}</h3>
-                        <p className="category">{x.category}</p>
+            {isLoading ? (
+              <div className="loadingTheData">
+                <Spinner
+                  animation="border"
+                  className="custom"
+                  size="lg"
+                  variant="primary"
+                />
+              </div>
+            ) : (
+              <div className="row">
+                {product.map((x) => (
+                  <div
+                    className="col-6 col-lg-3"
+                    key={x.id}
+                    onClick={() => setShowModalProduct(!showModalProduct)}
+                  >
+                    <div className="__listTheProduct">
+                      <div className="__productInDashboard">
+                        <div className="__productInDashboardImgWrapper">
+                          <img
+                            src={`http://127.0.0.1:8000/images/${x.image}`}
+                            alt=""
+                          />
+                        </div>
+                        <div className="__productInfoTitle">
+                          <h3>{x.title}</h3>
+                          <p className="category">{x.category}</p>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>
