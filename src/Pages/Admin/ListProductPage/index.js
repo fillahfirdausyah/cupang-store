@@ -37,10 +37,14 @@ function ListProductPage() {
 
   useEffect(() => {
     const fetchData = async () => {
-      setIsLoading(true);
-      let data = await api.get("/api/product");
-      setIsLoading(false);
-      setProduct(data.data);
+      try {
+        setIsLoading(true);
+        let data = await api.get("/api/product");
+        setIsLoading(false);
+        setProduct(data.data);
+      } catch (err) {
+        console.log(err);
+      }
     };
 
     fetchData();
@@ -114,13 +118,17 @@ function ListProductPage() {
   // Filter product by category
   const filterByCategory = (category) => {
     if (category === "semua") {
+      setIsLoading(true);
       api.get("/api/product").then((res) => setProduct(res.data));
+      setIsLoading(false);
     } else {
+      setIsLoading(true);
       api
         .post("/api/search", {
           category,
         })
         .then((res) => setProduct(res.data));
+      setIsLoading(false);
     }
   };
 
