@@ -7,6 +7,8 @@ import {
   Dropdown,
   DropdownButton,
   Spinner,
+  Toast,
+  ToastContainer,
 } from "react-bootstrap";
 import SearchIcon from "@material-ui/icons/Search";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
@@ -18,6 +20,7 @@ function ListProductPage() {
   const [showModal, setShowModal] = useState(false);
   const [showModalProduct, setShowModalProduct] = useState(false);
   const [showModalEdit, setShowModalEdit] = useState(false);
+  const [showToastNotify, setShowToastNotify] = useState(false);
   const [reload, setReload] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -29,6 +32,7 @@ function ListProductPage() {
   const [product, setProduct] = useState([]);
   const [productPreview, setProductPreview] = useState({});
   const [searchProduct, setSearchProduct] = useState("");
+  const [respondMessage, setRespondMessage] = useState("");
   const [productData, setProductData] = useState({
     title: "",
     material: "",
@@ -46,8 +50,8 @@ function ListProductPage() {
       try {
         setIsLoading(true);
         let data = await api.get("/api/product");
-        setIsLoading(false);
         setProduct(data.data);
+        setIsLoading(false);
       } catch (err) {
         console.log(err);
       }
@@ -94,7 +98,7 @@ function ListProductPage() {
   };
 
   // Add Product
-  const addProduct = (e) => {
+  const addProduct = async (e) => {
     e.preventDefault();
     let newProductData = new FormData();
     newProductData.append("title", productData.title);
@@ -105,11 +109,11 @@ function ListProductPage() {
     newProductData.append("image", productImage);
     newProductData.append("category_id", categoryId);
 
-    api
-      .post("/api/product", newProductData)
-      .then((res) => console.log(res.data))
-      .catch((err) => console.log(err));
-    e.target.reset();
+    let theData = await api.post("/api/product", newProductData);
+    setRespondMessage(theData.data.success);
+    setReload(!reload);
+    setCategoryId(0);
+    setProductImage(null);
     setProductData({
       title: "",
       material: "",
@@ -118,7 +122,7 @@ function ListProductPage() {
       additional: "",
     });
     setShowModal(false);
-    setReload(!reload);
+    setShowToastNotify(true);
   };
 
   // Filter product by category
@@ -174,36 +178,45 @@ function ListProductPage() {
     }
   };
 
-  // Ppdate Product
-  const updateProduct = (e) => {
+  // Update Product
+  const updateProduct = async (e) => {
     e.preventDefault();
 
-    let newProductData = new URLSearchParams();
-    newProductData.append("title", productData.title);
-    newProductData.append("material", productData.material);
-    newProductData.append("color", productData.color);
-    newProductData.append("size", productData.size);
-    newProductData.append("additional", productData.additional);
-    newProductData.append("image", productImage);
-    newProductData.append("category_id", categoryId);
-    newProductData.append("availability", availability);
-    newProductData.append("best_selling", bestSelling);
+    try {
+      let newProductData = new URLSearchParams();
+      newProductData.append("title", productData.title);
+      newProductData.append("material", productData.material);
+      newProductData.append("color", productData.color);
+      newProductData.append("size", productData.size);
+      newProductData.append("additional", productData.additional);
+      newProductData.append("image", productImage);
+      newProductData.append("category_id", categoryId);
+      newProductData.append("availability", availability);
+      newProductData.append("best_selling", bestSelling);
 
-    // console.log(availability);
+      // console.log(availability);
 
-    api
-      .put(`/api/product/${productData.id}`, newProductData, {
-        headers: { "content-type": "application/x-www-form-urlencoded" },
-      })
-      .then((res) => console.log(res.data));
-    e.target.reset();
-    setProductData({
-      title: "",
-      material: "",
-      color: "",
-      size: "",
-      additional: "",
-    });
+      let theData = await api.put(
+        `/api/product/${productData.id}`,
+        newProductData,
+        {
+          headers: { "content-type": "application/x-www-form-urlencoded" },
+        }
+      );
+      setRespondMessage(theData.data.success);
+      setShowModalEdit(false);
+      setShowToastNotify(true);
+      setReload(!reload);
+      setProductData({
+        title: "",
+        material: "",
+        color: "",
+        size: "",
+        additional: "",
+      });
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   // Delet product
@@ -211,8 +224,11 @@ function ListProductPage() {
     try {
       setShowModalProduct(!showModalProduct);
       let status = await api.delete(`api/product/${id}`);
-      console.log(status.data);
+      setRespondMessage(status.data.success);
+      setShowToastNotify(true);
       setReload(!reload);
+      setCategoryId(0);
+      setProductImage(null);
     } catch (err) {
       console.log(err);
     }
@@ -332,6 +348,11 @@ function ListProductPage() {
         setAvailability={setAvailability}
         setBestSelling={setBestSelling}
       />
+      <MyToast
+        setShowToastNotify={setShowToastNotify}
+        showToastNotify={showToastNotify}
+        respondMessage={respondMessage}
+      />
     </div>
   );
 }
@@ -365,6 +386,7 @@ function MyVerticallyCenteredModal(props) {
               placeholder="Nama Product.."
               value={props.productData.title}
               onChange={props.handleChange}
+              required
               name="title"
             />
           </div>
@@ -454,6 +476,7 @@ function MyVerticallyCenteredModal(props) {
               className="form-control"
               type="file"
               id="formFile"
+              required
               name="image"
               onChange={props.handleProductImage}
             />
@@ -622,7 +645,7 @@ function EditProductModal(props) {
               className="form-select"
               onChange={(e) => props.setAvailability(e.target.value)}
             >
-              <option value={0}>Pilih Ketersediaan</option>
+              <option value={1}>Pilih Ketersediaan</option>
               <option value={1}>Tersedia</option>
               <option value={0}>Tidak Tersedia</option>
             </select>
@@ -726,6 +749,25 @@ function EditProductModal(props) {
         </Button>
       </Modal.Footer>
     </Modal>
+  );
+}
+
+function MyToast(props) {
+  return (
+    <ToastContainer position="top-end" className="toast_notify">
+      <Toast
+        show={props.showToastNotify}
+        onClose={() => props.setShowToastNotify(false)}
+        bg="success"
+        delay={2000}
+        autohide
+      >
+        <Toast.Header>
+          <strong className="me-auto">Notifikasi</strong>
+        </Toast.Header>
+        <Toast.Body className="text-white">{props.respondMessage}</Toast.Body>
+      </Toast>
+    </ToastContainer>
   );
 }
 
