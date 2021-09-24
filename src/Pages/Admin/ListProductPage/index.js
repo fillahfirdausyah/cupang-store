@@ -24,6 +24,8 @@ function ListProductPage() {
   const [dataCategory, setDataCategory] = useState([]);
   const [categoryId, setCategoryId] = useState(0);
   const [productImage, setProductImage] = useState(null);
+  const [availability, setAvailability] = useState(0);
+  const [bestSelling, setBestSelling] = useState(0);
   const [product, setProduct] = useState([]);
   const [productPreview, setProductPreview] = useState({});
   const [searchProduct, setSearchProduct] = useState("");
@@ -153,9 +155,67 @@ function ListProductPage() {
   };
 
   // Edit Product
-  const editProduct = (id) => {
-    setShowModalProduct(!showModalProduct);
-    setShowModalEdit(!showModalEdit);
+  const editProduct = async (id) => {
+    try {
+      setShowModalProduct(!showModalProduct);
+      setShowModalEdit(!showModalEdit);
+      let theData = await api.get(`/api/product/${id}`);
+      let newDescription = await JSON.parse(theData.data.description);
+      setProductData({
+        title: theData.data.title,
+        material: newDescription.material,
+        color: newDescription.color,
+        size: newDescription.size,
+        additional: newDescription.additional,
+        id,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  // Ppdate Product
+  const updateProduct = (e) => {
+    e.preventDefault();
+
+    let newProductData = new URLSearchParams();
+    newProductData.append("title", productData.title);
+    newProductData.append("material", productData.material);
+    newProductData.append("color", productData.color);
+    newProductData.append("size", productData.size);
+    newProductData.append("additional", productData.additional);
+    newProductData.append("image", productImage);
+    newProductData.append("category_id", categoryId);
+    newProductData.append("availability", availability);
+    newProductData.append("best_selling", bestSelling);
+
+    // console.log(availability);
+
+    api
+      .put(`/api/product/${productData.id}`, newProductData, {
+        headers: { "content-type": "application/x-www-form-urlencoded" },
+      })
+      .then((res) => console.log(res.data));
+    e.target.reset();
+    setProductData({
+      title: "",
+      material: "",
+      color: "",
+      size: "",
+      additional: "",
+    });
+  };
+
+  // Delet product
+  const deleteProduct = async (id) => {
+    try {
+      setShowModalProduct(!showModalProduct);
+      let status = await api.delete(`api/product/${id}`);
+      console.log(status.data);
+      setReload(!reload);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -257,12 +317,20 @@ function ListProductPage() {
         onHide={() => setShowModalProduct(!showModalProduct)}
         data={productPreview}
         editProduct={editProduct}
+        deleteProduct={deleteProduct}
       />
 
       <EditProductModal
         show={showModalEdit}
         onHide={() => setShowModalEdit(!showModalEdit)}
         dataCategory={dataCategory}
+        data={productData}
+        handleChange={handleChange}
+        updateProduct={updateProduct}
+        selectCategoryId={selectCategoryId}
+        handleProductImage={handleProductImage}
+        setAvailability={setAvailability}
+        setBestSelling={setBestSelling}
       />
     </div>
   );
@@ -484,7 +552,10 @@ function ProductPreviewModal(props) {
           >
             <EditIcon />
           </button>
-          <button className="btn btn-danger">
+          <button
+            className="btn btn-danger"
+            onClick={() => props.deleteProduct(props.data.id)}
+          >
             <DeleteForeverIcon />
           </button>
         </div>
@@ -514,7 +585,7 @@ function EditProductModal(props) {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body className="__modalAddProduct __addProduct">
-        <form>
+        <form onSubmit={props.updateProduct}>
           <div className="mb-3">
             <label htmlFor="namaProduct" className="form-label">
               Nama Product
@@ -525,6 +596,8 @@ function EditProductModal(props) {
               className="form-control"
               id="namaProduct"
               placeholder="Nama Product.."
+              defaultValue={props.data.title}
+              onChange={props.handleChange}
               name="title"
             />
           </div>
@@ -542,6 +615,32 @@ function EditProductModal(props) {
             </select>
           </div>
           <div className="mb-3">
+            <label htmlFor="Category" className="form-label">
+              Ketersediaan
+            </label>
+            <select
+              className="form-select"
+              onChange={(e) => props.setAvailability(e.target.value)}
+            >
+              <option value={0}>Pilih Ketersediaan</option>
+              <option value={1}>Tersedia</option>
+              <option value={0}>Tidak Tersedia</option>
+            </select>
+          </div>
+          <div className="mb-3">
+            <label htmlFor="Category" className="form-label">
+              Best Seller
+            </label>
+            <select
+              className="form-select"
+              onChange={(e) => props.setBestSelling(e.target.value)}
+            >
+              <option value={0}>Pilih Best Seller</option>
+              <option value={1}>Iya</option>
+              <option value={0}>Tidak</option>
+            </select>
+          </div>
+          <div className="mb-3">
             <label htmlFor="Material" className="form-label">
               Material
             </label>
@@ -551,6 +650,8 @@ function EditProductModal(props) {
               className="form-control"
               id="Material"
               placeholder="Material"
+              defaultValue={props.data.material}
+              onChange={props.handleChange}
               name="material"
             />
             <div className="form-text">Opsional</div>
@@ -565,6 +666,8 @@ function EditProductModal(props) {
               className="form-control"
               id="Warna"
               placeholder="Warna"
+              defaultValue={props.data.color}
+              onChange={props.handleChange}
               name="color"
             />
             <div className="form-text">Opsional</div>
@@ -579,6 +682,8 @@ function EditProductModal(props) {
               className="form-control"
               id="Ukuran"
               placeholder="Ukuran"
+              defaultValue={props.data.size}
+              onChange={props.handleChange}
               name="size"
             />
             <div className="form-text">Opsional</div>
@@ -593,6 +698,8 @@ function EditProductModal(props) {
               className="form-control"
               id="Additional"
               placeholder="Additional"
+              defaultValue={props.data.additional}
+              onChange={props.handleChange}
               name="additional"
             />
             <div className="form-text">Opsional</div>
@@ -606,6 +713,7 @@ function EditProductModal(props) {
               className="form-control"
               type="file"
               id="formFile"
+              onChange={props.handleProductImage}
               name="image"
             />
           </div>
