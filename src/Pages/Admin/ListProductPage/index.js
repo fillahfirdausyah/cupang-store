@@ -9,12 +9,15 @@ import {
   Spinner,
 } from "react-bootstrap";
 import SearchIcon from "@material-ui/icons/Search";
+import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
+import EditIcon from "@material-ui/icons/Edit";
 import { DashboardHeader, DashboardNav } from "../../../Component";
 import "./style.css";
 
 function ListProductPage() {
   const [showModal, setShowModal] = useState(false);
   const [showModalProduct, setShowModalProduct] = useState(false);
+  const [showModalEdit, setShowModalEdit] = useState(false);
   const [reload, setReload] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -22,6 +25,7 @@ function ListProductPage() {
   const [categoryId, setCategoryId] = useState(0);
   const [productImage, setProductImage] = useState(null);
   const [product, setProduct] = useState([]);
+  const [productPreview, setProductPreview] = useState({});
   const [searchProduct, setSearchProduct] = useState("");
   const [productData, setProductData] = useState({
     title: "",
@@ -132,6 +136,28 @@ function ListProductPage() {
     }
   };
 
+  // Preview Product
+  const previewProduct = async (id) => {
+    try {
+      setShowModalProduct(!showModalProduct);
+      let theData = await api.get(`/api/product/${id}`);
+      let newDescription = JSON.parse(theData.data.description);
+      let newData = {
+        ...theData.data,
+        newDescription,
+      };
+      setProductPreview(newData);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  // Edit Product
+  const editProduct = (id) => {
+    setShowModalProduct(!showModalProduct);
+    setShowModalEdit(!showModalEdit);
+  };
+
   return (
     <div className="__dashboardPage">
       <DashboardHeader />
@@ -192,7 +218,7 @@ function ListProductPage() {
                   <div
                     className="col-6 col-lg-3"
                     key={x.id}
-                    onClick={() => setShowModalProduct(!showModalProduct)}
+                    onClick={() => previewProduct(x.id)}
                   >
                     <div className="__listTheProduct">
                       <div className="__productInDashboard">
@@ -229,6 +255,14 @@ function ListProductPage() {
       <ProductPreviewModal
         show={showModalProduct}
         onHide={() => setShowModalProduct(!showModalProduct)}
+        data={productPreview}
+        editProduct={editProduct}
+      />
+
+      <EditProductModal
+        show={showModalEdit}
+        onHide={() => setShowModalEdit(!showModalEdit)}
+        dataCategory={dataCategory}
       />
     </div>
   );
@@ -370,16 +404,216 @@ function MyVerticallyCenteredModal(props) {
 
 function ProductPreviewModal(props) {
   return (
-    <Modal {...props} backdrop="static" keyboard={false} centered>
+    <Modal
+      show={props.show}
+      onHide={props.onHide}
+      backdrop="static"
+      keyboard={false}
+      centered
+    >
       <Modal.Header className="__modalAddProductHeadFoot" closeButton>
-        <Modal.Title>Modal title</Modal.Title>
+        <Modal.Title>Detail Product</Modal.Title>
       </Modal.Header>
       <Modal.Body className="__modalAddProduct">
-        I will not close if you click outside me. Don't even try to press escape
-        key.
+        <div className="__detailProductImage">
+          <img
+            src={`http://127.0.0.1:8000/images/${props.data.image}`}
+            alt=""
+          />
+        </div>
+        <hr />
+        <div className="__detailProductInfo">
+          <table>
+            <colgroup>
+              <col span="1" style={{ width: "50%" }} />
+              <col span="1" style={{ width: "9%" }} />
+              <col span="1" style={{ width: "50%" }} />
+            </colgroup>
+            <tbody>
+              <tr>
+                <td>Nama Product</td>
+                <td>:</td>
+                <td>{props.data.title}</td>
+              </tr>
+              <tr>
+                <td>Material</td>
+                <td>:</td>
+                <td>
+                  {props.data.description
+                    ? props.data.newDescription.material === null
+                      ? "-"
+                      : props.data.newDescription.material
+                    : ""}
+                </td>
+              </tr>
+              <tr>
+                <td>Color</td>
+                <td>:</td>
+                <td>
+                  {props.data.description
+                    ? props.data.newDescription.color === null
+                      ? "-"
+                      : props.data.newDescription.color
+                    : ""}
+                </td>
+              </tr>
+              <tr>
+                <td>Size</td>
+                <td>:</td>
+                <td>
+                  {props.data.description
+                    ? props.data.newDescription.size === null
+                      ? "-"
+                      : props.data.newDescription.size
+                    : ""}
+                </td>
+              </tr>
+              <tr>
+                <td>Best Selling</td>
+                <td>:</td>
+                <td>{props.data.best_selling === 0 ? "Tidak" : "Iya"}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <hr />
+        <div className="__detailProductAction">
+          <button
+            className="btn btn-success"
+            onClick={() => props.editProduct(props.data.id)}
+          >
+            <EditIcon />
+          </button>
+          <button className="btn btn-danger">
+            <DeleteForeverIcon />
+          </button>
+        </div>
       </Modal.Body>
       <Modal.Footer className="__modalAddProductHeadFoot">
         <Button variant="danger" onClick={props.onHide}>
+          Close
+        </Button>
+      </Modal.Footer>
+    </Modal>
+  );
+}
+
+function EditProductModal(props) {
+  return (
+    <Modal
+      show={props.show}
+      onHide={props.onHide}
+      size="lg"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+      backdrop="static"
+    >
+      <Modal.Header className="__modalAddProductHeadFoot" closeButton>
+        <Modal.Title id="contained-modal-title-vcenter">
+          Edit Product
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body className="__modalAddProduct __addProduct">
+        <form>
+          <div className="mb-3">
+            <label htmlFor="namaProduct" className="form-label">
+              Nama Product
+            </label>
+            <input
+              autoComplete="off"
+              type="text"
+              className="form-control"
+              id="namaProduct"
+              placeholder="Nama Product.."
+              name="title"
+            />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="Category" className="form-label">
+              Category
+            </label>
+            <select className="form-select" onChange={props.selectCategoryId}>
+              <option defaultValue>Pilih Category</option>
+              {props.dataCategory.map((x) => (
+                <option value={x.id} key={x.id}>
+                  {x.category}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="mb-3">
+            <label htmlFor="Material" className="form-label">
+              Material
+            </label>
+            <input
+              autoComplete="off"
+              type="text"
+              className="form-control"
+              id="Material"
+              placeholder="Material"
+              name="material"
+            />
+            <div className="form-text">Opsional</div>
+          </div>
+          <div className="mb-3">
+            <label htmlFor="Warna" className="form-label">
+              Warna
+            </label>
+            <input
+              autoComplete="off"
+              type="text"
+              className="form-control"
+              id="Warna"
+              placeholder="Warna"
+              name="color"
+            />
+            <div className="form-text">Opsional</div>
+          </div>
+          <div className="mb-3">
+            <label htmlFor="Ukuran" className="form-label">
+              Ukuran
+            </label>
+            <input
+              autoComplete="off"
+              type="text"
+              className="form-control"
+              id="Ukuran"
+              placeholder="Ukuran"
+              name="size"
+            />
+            <div className="form-text">Opsional</div>
+          </div>
+          <div className="mb-3">
+            <label htmlFor="Additional" className="form-label">
+              Additional
+            </label>
+            <input
+              autoComplete="off"
+              type="text"
+              className="form-control"
+              id="Additional"
+              placeholder="Additional"
+              name="additional"
+            />
+            <div className="form-text">Opsional</div>
+          </div>
+          <div className="mb-3">
+            <label htmlFor="formFile" className="form-label">
+              Gambar
+            </label>
+            <input
+              autoComplete="off"
+              className="form-control"
+              type="file"
+              id="formFile"
+              name="image"
+            />
+          </div>
+          <button className="btn btn-primary w-100 mt-3">Simpan</button>
+        </form>
+      </Modal.Body>
+      <Modal.Footer className="__modalAddProductHeadFoot">
+        <Button onClick={props.onHide} className="btn btn-danger">
           Close
         </Button>
       </Modal.Footer>

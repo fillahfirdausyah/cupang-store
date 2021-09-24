@@ -51,6 +51,24 @@
   height: 350px !important;
 }
 
+.__detailProductImage {
+  text-align: center;
+}
+
+.__detailProductImage img {
+  width: 150px;
+}
+
+.__detailProductInfo {
+  font-size: 13px;
+}
+
+.__detailProductAction {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
 .__listTheProduct {
   /* margin-top: 25px; */
   background-color: rgba(33, 37, 41, 1);
