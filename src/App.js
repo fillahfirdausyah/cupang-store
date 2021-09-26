@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { AuthProvider } from "./Helpers/AuthContext";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -11,7 +12,9 @@ function App() {
   });
   return (
     <div className="App">
-      <Router />
+      <AuthProvider>
+        <Router />
+      </AuthProvider>
     </div>
   );
 }
