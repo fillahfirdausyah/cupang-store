@@ -2,6 +2,7 @@ import React from "react";
 
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import ScrollToTop from "./ScrollToTop";
+import ProtectedRoute from "./ProtectedRoute";
 import {
   AboutPage,
   BlogPage,
@@ -42,15 +43,18 @@ const Router = () => {
         <Route path="/login" exact>
           <LoginPage />
         </Route>
-        <Route path="/dashboard" exact>
+        {/* <Route path="/dashboard" exact>
           <DashboardPage />
-        </Route>
-        <Route path="/admin/products" exact>
+        </Route> */}
+        {/* <Route path="/admin/products" exact>
           <ListProductPage />
-        </Route>
-        <Route path="/admin/category" exact>
+        </Route> */}
+        {/* <Route path="/admin/category" exact>
           <ListCategoryPage />
-        </Route>
+        </Route> */}
+        <ProtectedRoute path="/dashboard" component={DashboardPage} exact />
+        <ProtectedRoute path="/admin/products" component={ListProductPage} />
+        <ProtectedRoute path="/admin/category" component={ListCategoryPage} />
       </Switch>
     </BrowserRouter>
   );
