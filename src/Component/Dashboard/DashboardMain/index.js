@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import api from "../../../Helpers/api-endpoint";
 
 import CategoryIcon from "@material-ui/icons/Category";
 import LocalMallIcon from "@material-ui/icons/LocalMall";
@@ -6,12 +7,32 @@ import LocalMallIcon from "@material-ui/icons/LocalMall";
 import "./style.css";
 
 function DashboardMain() {
+  const [totalProduct, setTotalProduct] = useState(0);
+  const [totalCategory, setTotalCategory] = useState(0);
+  const [product, setProduct] = useState([]);
+
+  useEffect(() => {
+    const fetchTotalProduct = async () => {
+      let product = await api.get("api/product");
+      setProduct(product.data);
+      setTotalProduct(product.data.length);
+    };
+
+    const fetchTotalCategory = async () => {
+      let category = await api.get("/api/category");
+      setTotalCategory(category.data.length);
+    };
+
+    fetchTotalProduct();
+    fetchTotalCategory();
+  }, []);
+
   return (
     <div className="__mainDashboard">
       <div className="__cardInfo __cardInfo-primary">
         <div className="__cardInfoLeft">
           <h4>Total Product</h4>
-          <span>1</span>
+          <span>{totalProduct}</span>
         </div>
         <div className="__cardInfoRight">
           <LocalMallIcon />
@@ -20,7 +41,7 @@ function DashboardMain() {
       <div className="__cardInfo __cardInfo-secondary">
         <div className="__cardInfoLeft">
           <h4>Total Category</h4>
-          <span>5</span>
+          <span>{totalCategory}</span>
         </div>
         <div className="__cardInfoRight">
           <CategoryIcon />
@@ -34,28 +55,16 @@ function DashboardMain() {
               <th scope="col">No</th>
               <th scope="col">Nama</th>
               <th scope="col">Category</th>
-              <th scope="col">Action</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>Larry the Bird</td>
-              <td>Larry the Bird</td>
-              <td>@twitter</td>
-            </tr>
+            {product.map((x, index) => (
+              <tr key={index}>
+                <th scope="row">{index + 1}</th>
+                <td>{x.title}</td>
+                <td>{x.category}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
