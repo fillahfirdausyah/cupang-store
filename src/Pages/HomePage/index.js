@@ -15,7 +15,6 @@ function HomePage() {
         amount: 7,
       });
       setProduct(products.data);
-      console.log(products.data);
     };
 
     fetchProduct();
