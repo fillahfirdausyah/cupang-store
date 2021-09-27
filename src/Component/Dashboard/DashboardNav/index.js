@@ -51,7 +51,7 @@ function DashboardNav() {
             </li>
           </NavLink>
           <li onClick={logoutHandler}>
-            <ExitToAppIcon />
+            <ExitToAppIcon color="error"/>
           </li>
         </ul>
       </div>
