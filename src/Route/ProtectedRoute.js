@@ -18,10 +18,8 @@ function ProtectedRoute({ component: Component, ...rest }) {
       {...rest}
       render={(props) => {
         if (token !== null) {
-          console.log(true);
           return <Component />;
         } else {
-          console.log(false);
           return (
             <Redirect
               to={{ pathname: "/login", state: { from: props.location } }}
