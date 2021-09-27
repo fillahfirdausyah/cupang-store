@@ -11,6 +11,7 @@
 .__productCategory {
   flex: 3;
   margin-left: 50px;
+  margin-top: 40px;
 }
 
 .__listProductCategory ul {
@@ -52,6 +53,10 @@
   filter: brightness(1.5);
 }
 
+.btn-primary.load_more_sm {
+  display: none;
+}
+
 @media (max-width: 991.98px) {
   .__product {
     flex-direction: column;
@@ -64,5 +69,13 @@
 
   .__listProductCategory ul li {
     font-size: medium;
+  }
+
+  .btn-primary.load_more_sm {
+    display: block;
+  }
+
+  .btn-primary.load_more_lg {
+    display: none;
   }
 }
