@@ -1,17 +1,25 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Route, Redirect } from "react-router-dom";
-import { useAuth } from "../Helpers/AuthContext";
 
 function ProtectedRoute({ component: Component, ...rest }) {
-  const { currentToken } = useAuth();
+  const [token, setToken] = useState("");
+
+  useEffect(() => {
+    let theToken = localStorage.getItem("token");
+    if (theToken !== null) {
+      setToken(theToken);
+    }
+  }, []);
 
   return (
     <Route
       {...rest}
       render={(props) => {
-        if (currentToken !== "") {
+        if (token !== null) {
+          console.log(true);
           return <Component />;
         } else {
+          console.log(false);
           return (
             <Redirect
               to={{ pathname: "/login", state: { from: props.location } }}
