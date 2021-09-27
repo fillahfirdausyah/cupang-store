@@ -8,6 +8,8 @@ function ProtectedRoute({ component: Component, ...rest }) {
     let theToken = localStorage.getItem("token");
     if (theToken !== null) {
       setToken(theToken);
+    } else {
+      setToken(null);
     }
   }, []);
 
