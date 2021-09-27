@@ -15,7 +15,7 @@ function ProductCard({ img, name, bestSeller }) {
         <span>Best Seller</span>
       </div>
       <div className="__productCardBody">
-        <img src={img} alt="" />
+        <img src={`http://127.0.0.1:8000/images/${img}`} alt="" />
       </div>
       <div className="__productCardRibbon">
         <span>{name}</span>
