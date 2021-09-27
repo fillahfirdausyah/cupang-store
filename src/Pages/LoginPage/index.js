@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Spinner } from "react-bootstrap";
 import { useHistory } from "react-router";
 import { useAuth } from "../../Helpers/AuthContext";
 import api from "../../Helpers/api-endpoint";
@@ -12,11 +13,13 @@ function LoginPage() {
   const history = useHistory();
   const { login } = useAuth();
   const [showToast, setShowToast] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const loginHandler = async (e) => {
     try {
+      setIsLoading(true);
       e.preventDefault();
       const userData = {
         email,
@@ -24,9 +27,11 @@ function LoginPage() {
       };
       let theData = await api.post(`/api/auth/login`, userData);
       login(theData.data.access_token);
+      setIsLoading(false);
       history.push("/dashboard");
     } catch (err) {
       setShowToast(true);
+      setIsLoading(false);
     }
   };
 
@@ -52,7 +57,13 @@ function LoginPage() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <button className="btn btn-primary w-100 mt-5">Login</button>
+            {isLoading ? (
+              <button className="btn btn-primary w-100 mt-5">
+                <Spinner animation="border" />
+              </button>
+            ) : (
+              <button className="btn btn-primary w-100 mt-5">Masuk</button>
+            )}
           </form>
         </div>
       </div>
