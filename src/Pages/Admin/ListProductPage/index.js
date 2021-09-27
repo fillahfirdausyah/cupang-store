@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useAuth } from "../../../Helpers/AuthContext";
 import api from "../../../Helpers/api-endpoint";
 
 import {
@@ -17,6 +18,7 @@ import { DashboardHeader, DashboardNav } from "../../../Component";
 import "./style.css";
 
 function ListProductPage() {
+  const { currentToken } = useAuth();
   const [showModal, setShowModal] = useState(false);
   const [showModalProduct, setShowModalProduct] = useState(false);
   const [showModalEdit, setShowModalEdit] = useState(false);
@@ -109,7 +111,11 @@ function ListProductPage() {
     newProductData.append("image", productImage);
     newProductData.append("category_id", categoryId);
 
-    let theData = await api.post("/api/product", newProductData);
+    let theData = await api.post("/api/product", newProductData, {
+      headers: {
+        Authorization: `Bearer ${currentToken}`,
+      },
+    });
     setRespondMessage(theData.data.success);
     setReload(!reload);
     setCategoryId(0);
