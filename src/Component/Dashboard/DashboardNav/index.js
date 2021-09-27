@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useHistory } from "react-router-dom";
 
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import CategoryIcon from "@material-ui/icons/Category";
@@ -10,8 +10,14 @@ import "./style.css";
 
 function DashboardNav() {
   const location = useLocation();
+  const history = useHistory();
   const { pathname } = location;
   const splitLocation = pathname.split("/");
+
+  const logoutHandler = () => {
+    localStorage.removeItem("token");
+    history.push("/home");
+  };
 
   return (
     <div className="__sideNav">
@@ -44,7 +50,7 @@ function DashboardNav() {
               <CategoryIcon />
             </li>
           </NavLink>
-          <li>
+          <li onClick={logoutHandler}>
             <ExitToAppIcon />
           </li>
         </ul>
