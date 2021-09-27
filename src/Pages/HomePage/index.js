@@ -1,12 +1,26 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
+import api from "../../Helpers/api-endpoint";
 
 import { Navbar, Jumbotron, Footer, ProductCard } from "../../Component";
-import dataProduct from "../../dataProduct";
 
 import "./style.css";
 
 function HomePage() {
+  const [product, setProduct] = useState([]);
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      let products = await api.post("/api/search/", {
+        amount: 7,
+      });
+      setProduct(products.data);
+      console.log(products.data);
+    };
+
+    fetchProduct();
+  }, []);
+
   return (
     <div className="__homePage">
       <Navbar />
@@ -35,9 +49,9 @@ function HomePage() {
           </p>
           <div className="__homeProductList">
             <div className="row">
-              {dataProduct.map((data) => (
+              {product.map((data) => (
                 <div className="col-lg-3 col-md-4" key={data.id}>
-                  <ProductCard img={data.img} name={data.name} />
+                  <ProductCard img={data.image} name={data.title} />
                 </div>
               ))}
             </div>
