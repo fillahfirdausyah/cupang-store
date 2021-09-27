@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router";
 import { useAuth } from "../../../Helpers/AuthContext";
 import api from "../../../Helpers/api-endpoint";
 
@@ -18,6 +19,7 @@ import { DashboardHeader, DashboardNav } from "../../../Component";
 import "./style.css";
 
 function ListProductPage() {
+  const history = useHistory();
   const { currentToken } = useAuth();
   const [showModal, setShowModal] = useState(false);
   const [showModalProduct, setShowModalProduct] = useState(false);
@@ -45,6 +47,24 @@ function ListProductPage() {
 
   useEffect(() => {
     api.get("/api/category").then((res) => setDataCategory(res.data));
+  }, []);
+
+  useEffect(() => {
+    const verifyToken = async () => {
+      let token = localStorage.getItem("token");
+      try {
+        await api.get(`/api/auth/verify-token`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+      } catch (err) {
+        localStorage.removeItem("token");
+        history.push("/login");
+      }
+    };
+
+    verifyToken();
   }, []);
 
   useEffect(() => {

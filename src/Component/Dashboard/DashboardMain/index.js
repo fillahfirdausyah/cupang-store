@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router";
 import api from "../../../Helpers/api-endpoint";
 
 import CategoryIcon from "@material-ui/icons/Category";
@@ -7,9 +8,28 @@ import LocalMallIcon from "@material-ui/icons/LocalMall";
 import "./style.css";
 
 function DashboardMain() {
+  const history = useHistory();
   const [totalProduct, setTotalProduct] = useState(0);
   const [totalCategory, setTotalCategory] = useState(0);
   const [product, setProduct] = useState([]);
+
+  useEffect(() => {
+    const verifyToken = async () => {
+      let token = localStorage.getItem("token");
+      try {
+        await api.get(`/api/auth/verify-token`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+      } catch (err) {
+        localStorage.removeItem("token");
+        history.push("/login");
+      }
+    };
+
+    verifyToken();
+  }, []);
 
   useEffect(() => {
     const fetchTotalProduct = async () => {
@@ -29,22 +49,28 @@ function DashboardMain() {
 
   return (
     <div className="__mainDashboard">
-      <div className="__cardInfo __cardInfo-primary">
-        <div className="__cardInfoLeft">
-          <h4>Total Product</h4>
-          <span>{totalProduct}</span>
+      <div className="row">
+        <div className="col-12 col-lg-6">
+          <div className="__cardInfo __cardInfo-primary">
+            <div className="__cardInfoLeft">
+              <h4>Total Product</h4>
+              <span>{totalProduct}</span>
+            </div>
+            <div className="__cardInfoRight">
+              <LocalMallIcon />
+            </div>
+          </div>
         </div>
-        <div className="__cardInfoRight">
-          <LocalMallIcon />
-        </div>
-      </div>
-      <div className="__cardInfo __cardInfo-secondary">
-        <div className="__cardInfoLeft">
-          <h4>Total Category</h4>
-          <span>{totalCategory}</span>
-        </div>
-        <div className="__cardInfoRight">
-          <CategoryIcon />
+        <div className="col-12 col-lg-6">
+          <div className="__cardInfo __cardInfo-secondary">
+            <div className="__cardInfoLeft">
+              <h4>Total Category</h4>
+              <span>{totalCategory}</span>
+            </div>
+            <div className="__cardInfoRight">
+              <CategoryIcon />
+            </div>
+          </div>
         </div>
       </div>
       <div className="__listProductDashboard">

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router";
 import { Modal, Button, Toast, ToastContainer } from "react-bootstrap";
 
 import api from "../../../Helpers/api-endpoint";
@@ -7,6 +8,7 @@ import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import "./style.css";
 
 function ListCategoryPage() {
+  const history = useHistory();
   const [showModal, setShowModal] = useState(false);
   const [showToastNotify, setShowToastNotify] = useState(false);
   const [reload, setReload] = useState(false);
@@ -14,6 +16,24 @@ function ListCategoryPage() {
   const [categoryName, setCategoryName] = useState("");
   const [categoriesData, setCategoriesData] = useState([]);
   const [resMessage, setResMessage] = useState("");
+
+  useEffect(() => {
+    const verifyToken = async () => {
+      let token = localStorage.getItem("token");
+      try {
+        await api.get(`/api/auth/verify-token`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+      } catch (err) {
+        localStorage.removeItem("token");
+        history.push("/login");
+      }
+    };
+
+    verifyToken();
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
