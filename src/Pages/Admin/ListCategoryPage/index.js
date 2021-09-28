@@ -47,10 +47,19 @@ function ListCategoryPage() {
   // Add category
   const addCategory = (e) => {
     e.preventDefault();
+    let token = localStorage.getItem("token");
     api
-      .post("/api/category", {
-        category: categoryName,
-      })
+      .post(
+        "/api/category",
+        {
+          category: categoryName,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
       .then((res) => setResMessage(res.data.success))
       .catch((err) => console.log(err));
     setCategoryName("");
