@@ -1,4 +1,5 @@
 import React from "react";
+import ApiBaseURL from "../../Helpers/apiBaseUrl";
 
 import "./style.css";
 
@@ -15,7 +16,7 @@ function ProductCard({ img, name, bestSeller }) {
         <span>Best Seller</span>
       </div>
       <div className="__productCardBody">
-        <img src={`http://127.0.0.1:8000/images/${img}`} alt="" />
+        <img src={`${ApiBaseURL}/images/${img}`} alt="" />
       </div>
       <div className="__productCardRibbon">
         <span>{name}</span>

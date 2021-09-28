@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router";
 import { useAuth } from "../../../Helpers/AuthContext";
 import api from "../../../Helpers/api-endpoint";
+import ApiBaseURL from "../../../Helpers/apiBaseUrl";
 
 import {
   Modal,
@@ -325,10 +326,7 @@ function ListProductPage() {
                     <div className="__listTheProduct">
                       <div className="__productInDashboard">
                         <div className="__productInDashboardImgWrapper">
-                          <img
-                            src={`http://127.0.0.1:8000/images/${x.image}`}
-                            alt=""
-                          />
+                          <img src={`${ApiBaseURL}/images/${x.image}`} alt="" />
                         </div>
                         <div className="__productInfoTitle">
                           <h3>{x.title}</h3>
