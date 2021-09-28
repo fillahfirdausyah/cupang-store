@@ -19,6 +19,7 @@
 .__sideNav ul li {
   margin-left: 0;
   color: white;
+  cursor: pointer;
 }
 
 .__sideNav ul li.active {
