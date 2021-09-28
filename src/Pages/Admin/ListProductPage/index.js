@@ -531,10 +531,7 @@ function ProductPreviewModal(props) {
       </Modal.Header>
       <Modal.Body className="__modalAddProduct">
         <div className="__detailProductImage">
-          <img
-            src={`http://127.0.0.1:8000/images/${props.data.image}`}
-            alt=""
-          />
+          <img src={`${ApiBaseURL}/images/${props.data.image}`} alt="" />
         </div>
         <hr />
         <div className="__detailProductInfo">
