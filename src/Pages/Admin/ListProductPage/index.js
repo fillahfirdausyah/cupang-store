@@ -250,7 +250,11 @@ function ListProductPage() {
   const deleteProduct = async (id) => {
     try {
       setShowModalProduct(!showModalProduct);
-      let status = await api.delete(`api/product/${id}`);
+      let status = await api.delete(`api/product/${id}`, {
+        headers: {
+          Authorization: `Bearer ${currentToken}`,
+        },
+      });
       setRespondMessage(status.data.success);
       setShowToastNotify(true);
       setReload(!reload);

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useAuth } from "../../../Helpers/AuthContext";
 import { useHistory } from "react-router";
 import { Modal, Button, Toast, ToastContainer } from "react-bootstrap";
 
@@ -9,6 +10,7 @@ import "./style.css";
 
 function ListCategoryPage() {
   const history = useHistory();
+  const { currentToken } = useAuth();
   const [showModal, setShowModal] = useState(false);
   const [showToastNotify, setShowToastNotify] = useState(false);
   const [reload, setReload] = useState(false);
@@ -45,11 +47,12 @@ function ListCategoryPage() {
   }, [reload]);
 
   // Add category
-  const addCategory = (e) => {
+  const addCategory = async (e) => {
     e.preventDefault();
+    setReload(true);
     let token = localStorage.getItem("token");
-    api
-      .post(
+    try {
+      let theDataResponse = await api.post(
         "/api/category",
         {
           category: categoryName,
@@ -59,23 +62,32 @@ function ListCategoryPage() {
             Authorization: `Bearer ${token}`,
           },
         }
-      )
-      .then((res) => setResMessage(res.data.success))
-      .catch((err) => console.log(err));
+      );
+      setResMessage(theDataResponse.data.success);
+    } catch (err) {
+      console.log(err);
+    }
     setCategoryName("");
     setShowModal(false);
     setShowToastNotify(true);
-    setReload(!reload);
+    setReload(false);
   };
 
   // Delete Category
-  const deleteCategory = (id) => {
-    api
-      .delete(`/api/category/${id}`)
-      .then((res) => setResMessage(res.data.success))
-      .catch((err) => console.log(err));
+  const deleteCategory = async (id) => {
+    setReload(true);
+    try {
+      let resData = await api.delete(`/api/category/${id}`, {
+        headers: {
+          Authorization: `Bearer ${currentToken}`,
+        },
+      });
+      setResMessage(resData.data.success);
+    } catch (err) {
+      console.log(err);
+    }
+    setReload(false);
     setShowToastNotify(true);
-    setReload(!reload);
   };
 
   return (
