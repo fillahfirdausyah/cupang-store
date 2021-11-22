@@ -54,7 +54,7 @@ function HomePage() {
                 </div>
               ))}
             </div>
-            <NavLink to="/products" className="btn btn-primary mt-5 mb-5">
+            <NavLink to="/products" className="btn btn-secondary mt-5 mb-5">
               More Product
             </NavLink>
           </div>

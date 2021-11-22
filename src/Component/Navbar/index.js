@@ -15,15 +15,10 @@ function Navbar() {
 
   return (
     <div className="__navbar">
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+      <nav className="navbar navbar-expand-lg navbar-light bg-secondary">
         <div className="container">
           <NavLink className="navbar-brand d-flex align-items-center" to="/">
-            <img
-              src={KlabberLogo}
-              className="d-inline-block align-text-top __navbarImg"
-              alt=""
-            />
-            Klabber ID
+            CuppangKU
           </NavLink>
           <button
             className="navbar-toggler"
