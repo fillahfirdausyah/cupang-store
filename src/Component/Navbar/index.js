@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 
-import KlabberLogo from "../../Assets/img/klabber.jpg";
-
 import "./style.css";
 
 function Navbar() {

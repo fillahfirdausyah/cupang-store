@@ -3,11 +3,11 @@
   margin-top: 25px;
 }
 
-.__jumbotron .__carouselWrapper {
-  width: 100% !important;
-  height: 500px !important;
-  /* overflow: hidden; */
-}
+/* .__jumbotron .__carouselWrapper {
+  width: 100% !important; 
+  height: 400px !important;
+  overflow: hidden;
+} */
 
 .carousel {
   width: 100%;
