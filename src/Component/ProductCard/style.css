@@ -1,9 +1,7 @@
 .__productCard {
   position: relative;
-  background-color: rgba(33, 37, 41, 1);
   width: 100%;
   margin-bottom: 20px;
-  border-radius: 10px;
 }
 
 .__productCardBestSeller.hidden {
@@ -11,7 +9,7 @@
 }
 
 .__productCardBestSeller {
-  background-color: #e9c501;
+  background-color: #ac4a64;
   position: absolute;
   color: black;
   right: -5px;
@@ -33,22 +31,46 @@
 }
 
 .__productCardBody img {
-  max-width: 100%;
-  border-radius: 10px;
+  width: 100%;
+  height: 150px;
 }
 
-.__productCardRibbon {
-  position: absolute;
-  background-color: #e9c501;
-  color: black;
-  width: 40%;
-  height: 40px;
-  bottom: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.__productCardInfo {
+  text-align: left;
 }
 
-.__productCardRibbon span {
-  font-size: 10px;
+.__productCardInfo .title {
+  margin-top: 10px
+}
+
+.__productCardInfo .title p {
+  font-size: 17px;
+  color: #9cd4ff;
+  font-weight: 600;
+}
+
+.__productCardInfo .price p {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.__productCardInfo .price p span {
+  font-size: 14px;
+  font-weight: 500;
+  color: #e0e0e0;
+  text-decoration: line-through;
+}
+
+.__productCardInfo .price .available {
+  margin-top: -15px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #9cd4ff;
+}
+
+.__productCardInfo .price .available .MuiSvgIcon-root {
+  font-size: 18px;
+  font-weight: 700;
+  margin-right: 8px;
+  color: #9cd4ff;
 }
