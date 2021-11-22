@@ -1,16 +1,24 @@
 .__homeSection {
   margin-top: 20px;
   font-size: 13px;
+  text-align: center;
 }
 
-.__homeSection h1 {
-  font-family: Cyberpunk-Regular;
-  color: #e9c501;
+.__homeSection h4 {
+  color: #9cd4ff;
 }
 
-.__homeSection blockquote {
-  border-left: 3px solid #e9c501;
-  padding: 0.5rem 1rem;
+.__homeSectionWa {
+  font-size: 23px;
+}
+
+.__homeSectionWa p {
+  color: #ac4a64;
+  font-weight: 600;
+}
+
+.__homeSectionWa span a {
+  text-decoration: none;
 }
 
 .__homeProduct {
@@ -20,7 +28,7 @@
 
 .__homeProduct h1 {
   font-size: 27px;
-  color: #e9c501;
+  color: #9cd4ff;
 }
 
 .__homeProduct p {
