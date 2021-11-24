@@ -94,7 +94,7 @@ function Productpage() {
             </div>
           ) : (
             <div className="row col-product">
-              {product.map((data) => (
+              {/* {product.map((data) => (
                 <div
                   className="col-lg-4 col-md-6 col-sm-6 col-12"
                   key={data.id}
@@ -105,7 +105,19 @@ function Productpage() {
                     // bestSeller={data.bestSeller}
                   />
                 </div>
-              ))}
+              ))} */}
+              <div className="col-lg-4 col-md-6 col-sm-6 col-12">
+                <ProductCard
+                  img="https://i.ytimg.com/vi/KaNrpVqcK8k/maxresdefault.jpg"
+                  name="Cupang Albino"
+                />
+              </div>
+              <div className="col-lg-4 col-md-6 col-sm-6 col-12">
+                <ProductCard
+                  img="https://celotehriau.com/assets/berita/original/29211048875-ikan-cupang-half-moon.jpeg"
+                  name="Cupang Merah"
+                />
+              </div>
               <button
                 className="btn btn-primary load_more_lg"
                 onClick={() => setStateNumber(stateNumber + 2)}
@@ -128,12 +140,20 @@ function Productpage() {
                 <li onClick={() => filterByCategory("semua")}>
                   <ArrowForwardIosIcon className="arrowIcon" /> Semua
                 </li>
-                {category.map((x) => (
+                {/* {category.map((x) => (
                   <li key={x.id} onClick={() => filterByCategory(x.category)}>
                     <ArrowForwardIosIcon className="arrowIcon" />
                     {x.category}
                   </li>
-                ))}
+                ))} */}
+                <li>
+                  <ArrowForwardIosIcon className="arrowIcon" />
+                  Giant Cupang
+                </li>
+                <li>
+                  <ArrowForwardIosIcon className="arrowIcon" />
+                  Rose Cupang
+                </li>
               </ul>
             </div>
           </div>

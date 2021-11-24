@@ -16,8 +16,8 @@
 .__footer .section1 h3 {
   font-weight: 800;
   font-size: medium;
-  font-family: Cyberpunk-Regular;
-  color: #e9c501;
+  /* font-family: Cyberpunk-Regular; */
+  color: #9cd4ff;
 }
 
 .octa-footer p {

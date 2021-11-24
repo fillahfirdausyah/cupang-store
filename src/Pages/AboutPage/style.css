@@ -10,8 +10,8 @@
 
 .__aboutUs .aboutCaption span {
   font-size: 30px;
-  font-family: Cyberpunk-Regular;
-  color: #e9c501;
+  /* font-family: Cyberpunk-Regular; */
+  color: #9cd4ff;
 }
 
 @media (max-width: 767.98px) {

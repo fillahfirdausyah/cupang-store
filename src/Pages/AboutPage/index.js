@@ -17,14 +17,14 @@ function AboutPage() {
             data-aos="fade-right"
             data-aos-duration="800"
           >
-            <img src={KlabberLogog} alt="" />
+            {/* <img src={KlabberLogog} alt="" /> */}
           </div>
           <div
             className="aboutCaption mx-3"
             data-aos="fade-up"
             data-aos-duration="1000"
           >
-            <span>Klabber.ID</span>
+            <span>Cupang Shop</span>
             <h1>Tentang Kami</h1>
             <p>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis

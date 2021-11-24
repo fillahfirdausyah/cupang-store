@@ -16,7 +16,7 @@ function Navbar() {
       <nav className="navbar navbar-expand-lg navbar-light bg-secondary">
         <div className="container">
           <NavLink className="navbar-brand d-flex align-items-center" to="/">
-            CuppangKU
+            Cuppang Shop
           </NavLink>
           <button
             className="navbar-toggler"
@@ -61,14 +61,14 @@ function Navbar() {
               >
                 About
               </NavLink>
-              <NavLink
+              {/* <NavLink
                 className={
                   splitLocation[1] === "faq" ? "nav-link active" : "nav-link"
                 }
                 to="/faq"
               >
                 FaQ
-              </NavLink>
+              </NavLink> */}
               <NavLink
                 className={
                   splitLocation[1] === "how-to-order"

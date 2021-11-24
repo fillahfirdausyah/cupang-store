@@ -15,17 +15,17 @@ function Footer() {
         <div className="row">
           <div className="col-md-3 octa-footer">
             <div className="section1 d-flex align-items-center">
-              <img src={KlabberLogo} alt="" className="img-fluid" />
+              {/* <img src={KlabberLogo} alt="" className="img-fluid" /> */}
               <div className="infoWrapper">
-                <h3>Klabber.ID</h3>
-                <div className="sosmed d-flex justify-content-between">
+                <h3>Cupang Shop</h3>
+                {/* <div className="sosmed d-flex justify-content-between">
                   <InstagramIcon fontSize="small" />
                   <FacebookIcon fontSize="small" />
                   <img src={TokopediaIcon} alt="" />
-                </div>
+                </div> */}
               </div>
             </div>
-            <p>Klabber.ID</p>
+            <p>Cupang Shop</p>
             <p className="year">© 2019-2021</p>
           </div>
           <div className="col-md-3 col-6 mt-5">
