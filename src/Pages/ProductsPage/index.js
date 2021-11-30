@@ -72,11 +72,11 @@ function Productpage() {
       <Navbar />
       <div className="container">
         {/* Main */}
-        <div className="__searchProductWrapper">
+        <div className="__searchProductWrapper"> 
           <input
             autoComplete="off"
             type="text"
-            placeholder="Cari Product.."
+            placeholder="Cari Cupang.."
             value={searchProduct}
             onChange={(e) => setSearchProduct(e.target.value)}
           />
@@ -119,18 +119,18 @@ function Productpage() {
                 />
               </div>
               <button
-                className="btn btn-primary load_more_lg"
+                className="btn btn-secondary load_more_lg"
                 onClick={() => setStateNumber(stateNumber + 2)}
               >
-                Load More
+                Lihat Yang Lain
               </button>
             </div>
           )}
           <button
-            className="btn btn-primary load_more_sm"
+            className="btn btn-secondary load_more_sm"
             onClick={() => setStateNumber(stateNumber + 2)}
           >
-            Load More
+            Lihat Yang Lain
           </button>
 
           <div className="__productCategory">

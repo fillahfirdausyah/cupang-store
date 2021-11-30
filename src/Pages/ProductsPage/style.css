@@ -5,7 +5,7 @@
 
 .col-product {
   flex: 8;
-  /* background-color: red; */
+  /* background-color: red; */ 
 }
 
 .__productCategory {
@@ -53,7 +53,7 @@
   filter: brightness(1.5);
 }
 
-.btn-primary.load_more_sm {
+.btn-secondary.load_more_sm {
   display: none;
 }
 
@@ -75,11 +75,11 @@
     font-size: medium;
   }
 
-  .btn-primary.load_more_sm {
+  .btn-secondary.load_more_sm {
     display: block;
   }
 
-  .btn-primary.load_more_lg {
+  .btn-secondary.load_more_lg {
     display: none;
   }
 }

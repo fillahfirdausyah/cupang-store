@@ -13,7 +13,7 @@ function Navbar() {
 
   return (
     <div className="__navbar">
-      <nav className="navbar navbar-expand-lg navbar-light bg-secondary">
+      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <div className="container">
           <NavLink className="navbar-brand d-flex align-items-center" to="/">
             Cuppang Shop

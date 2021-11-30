@@ -1,11 +1,5 @@
 import React from "react";
 import { Container } from "react-bootstrap";
-
-import InstagramIcon from "@material-ui/icons/Instagram";
-import FacebookIcon from "@material-ui/icons/Facebook";
-import TokopediaIcon from "../../Assets/img/tokopedia.svg";
-
-import KlabberLogo from "../../Assets/img/klabber.jpg";
 import "./style.css";
 
 function Footer() {
@@ -43,10 +37,10 @@ function Footer() {
           </div>
           <div className="col-md-3 col-12 mt-5">
             <h1>Kantor</h1>
-            <li>Klabber.ID</li>
+            <li>Cupang Shop</li>
             <li>Jl. Menuju Surga, Dunia, No.1</li>
             <li>Jawa, Indonesia</li>
-            <li>team@klabber.id</li>
+            <li>team@cupangshop.com</li>
           </div>
         </div>
       </Container>
