@@ -10,6 +10,9 @@
 
 .__homeSectionWa {
   font-size: 23px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .__homeSectionWa p {

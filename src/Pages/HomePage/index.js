@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import api from "../../Helpers/api-endpoint";
 
+import WhatsAppIcon from "@material-ui/icons/WhatsApp";
+
 import { Navbar, Jumbotron, Footer, ProductCard } from "../../Component";
 
 import "./style.css";
@@ -37,12 +39,13 @@ function HomePage() {
             ea? Quae, harum sapiente.
           </p>
           <div className="__homeSectionWa">
-            <p>
-              Wa Klik:{" "}
-              <span>
-                <NavLink to="#">0888 8888 4212</NavLink>
-              </span>
-            </p>
+            <WhatsAppIcon fontSize="large" style={{
+              color: 'green',
+              marginRight: '10px'
+            }} />
+            <span>
+              <NavLink to="#">0888 8888 4212</NavLink>
+            </span>
           </div>
         </div>
         {/* End Main */}
@@ -61,25 +64,46 @@ function HomePage() {
                 </div>
               ))} */}
               <div className="col-lg-3 col-md-4">
-                <ProductCard img="https://i.ytimg.com/vi/KaNrpVqcK8k/maxresdefault.jpg" name="Cupang Albino" />
+                <ProductCard
+                  img="https://i.ytimg.com/vi/KaNrpVqcK8k/maxresdefault.jpg"
+                  name="Cupang Albino"
+                />
               </div>
               <div className="col-lg-3 col-md-4">
-                <ProductCard img="https://celotehriau.com/assets/berita/original/29211048875-ikan-cupang-half-moon.jpeg" name="Cupang Merah" />
+                <ProductCard
+                  img="https://celotehriau.com/assets/berita/original/29211048875-ikan-cupang-half-moon.jpeg"
+                  name="Cupang Merah"
+                />
               </div>
               <div className="col-lg-3 col-md-4">
-                <ProductCard img="https://republikseo.net/wp-content/uploads/2020/09/Ikan-Cupang-Giant.jpg" name="Cupang Giant" />
+                <ProductCard
+                  img="https://republikseo.net/wp-content/uploads/2020/09/Ikan-Cupang-Giant.jpg"
+                  name="Cupang Giant"
+                />
               </div>
               <div className="col-lg-3 col-md-4">
-                <ProductCard img="https://4.bp.blogspot.com/-2tlYMRcf4zc/WlR4lzdQrtI/AAAAAAAAEtE/QHg-CdL4diMVcloe2uLuKkTeTeEbJ5xJQCLcBGAs/s1600/betta%2B2.jpg" name="Cupang Biru" />
+                <ProductCard
+                  img="https://4.bp.blogspot.com/-2tlYMRcf4zc/WlR4lzdQrtI/AAAAAAAAEtE/QHg-CdL4diMVcloe2uLuKkTeTeEbJ5xJQCLcBGAs/s1600/betta%2B2.jpg"
+                  name="Cupang Biru"
+                />
               </div>
               <div className="col-lg-3 col-md-4">
-                <ProductCard img="https://i.ytimg.com/vi/zfc_J3Pn44c/maxresdefault.jpg" name="Cupang Avatar" />
+                <ProductCard
+                  img="https://i.ytimg.com/vi/zfc_J3Pn44c/maxresdefault.jpg"
+                  name="Cupang Avatar"
+                />
               </div>
               <div className="col-lg-3 col-md-4">
-                <ProductCard img="https://d3p0bla3numw14.cloudfront.net/news-content/img/2020/09/23135408/image11.jpg" name="Cupang Dori" />
+                <ProductCard
+                  img="https://d3p0bla3numw14.cloudfront.net/news-content/img/2020/09/23135408/image11.jpg"
+                  name="Cupang Dori"
+                />
               </div>
               <div className="col-lg-3 col-md-4">
-                <ProductCard img="https://2.bp.blogspot.com/_TzWR3SD8aCI/S_dApdITncI/AAAAAAAAAAU/FDfzUMkr58k/w1200-h630-p-k-no-nu/SuperRedHalfMoon.jpg" name="Cupang Halfmoon" />
+                <ProductCard
+                  img="https://2.bp.blogspot.com/_TzWR3SD8aCI/S_dApdITncI/AAAAAAAAAAU/FDfzUMkr58k/w1200-h630-p-k-no-nu/SuperRedHalfMoon.jpg"
+                  name="Cupang Halfmoon"
+                />
               </div>
             </div>
             <NavLink to="/products" className="btn btn-secondary mt-5 mb-5">

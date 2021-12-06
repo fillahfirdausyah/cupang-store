@@ -1,13 +1,13 @@
 .navbar {
-  background-image: url("/src/Assets/img/navbar-background.png");
+  background-image: url("/src/Assets/img/background-navbar.png");
   /* background-repeat: no-repeat; */
   /* background-attachment: fixed; */
   background-position: center;
-  height: 80px;
+  /* height: 80px; */
 }
 
 .navbar-brand {
-  color: #9cd4ff !important;
+  color: white !important;
 }
 
 .__navbarImg {
